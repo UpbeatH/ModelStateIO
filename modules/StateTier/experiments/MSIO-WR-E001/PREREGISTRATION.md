@@ -38,8 +38,8 @@ the same prompt, tokens, GPU offload, runtime binary, timeout (240 s), and
 one fresh process. Before each run, record host state; no cache-drop, process
 kill, system parameter write, or shared-storage interference is permitted.
 
-Primary within-block contrast is `none_ms - mmap_ms`. Report all six raw
-pairs per model, median contrast, and min/max; no inferential p-value is
+Primary within-block contrast is `none_ms - mmap_ms`. Report all three paired
+contrasts per model, median contrast, and min/max; no inferential p-value is
 planned. A timeout, incorrect output, or unavailable model is a failed sample
 and is not silently replaced.
 
