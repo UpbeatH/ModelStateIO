@@ -24,6 +24,7 @@ def resident(fd,n):
 def main():
     if sha(MODEL)!='74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db': return 90
     if sha(BINARY)!='39a6fb1233811c9d6bf5d646ec17f810562a9f78eb6a9cb558940479913dbe24': return 91
+    if sha(MEASURE)!='6626a424176fb47a09cfb6e133e23600514dbca4d16d296eee5f5acedb847506': return 96
     if OUT.exists(): return 92
     OUT.mkdir(parents=True); RAW.mkdir(); rows=[]; size=MODEL.stat().st_size; requested=int(size*FRACTION)
     for bi,order in enumerate(ORDERS,1):
