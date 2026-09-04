@@ -1,33 +1,19 @@
-# MSIO-CP-E022 held-out 7B lead-time confirmation
-
-Status: frozen; no result yet. Date: 2026-09-04.
+# MSIO-CP-E022 completed-preparation versus concurrent-fill gate
 
 ## Question
 
-Does the completed 75%-prefix preparation mechanism that qualified on the
-0.5B model retain a material request-visible benefit on a hash-distinct 7B
-GGUF footprint using the same g130 runtime and storage device?
+E021 showed a timing-qualified 75% prefetch benefit at 0.7 s and an unplanned lead-0 observation. E022 separates the two mechanisms under a new confirmatory ID: no prefetch, 75% prefetch known complete before request, and 75% prefetch still active at request arrival.
 
-## Frozen protocol
+## Frozen design
 
-- Held-out model: isolated 7B Q4_K_M GGUF, SHA-256
-  `2bada8a7450677000f678be90653b85d364de7db25eb5ea54136ada5f3933730`.
-- The non-inference preflight measured a 2.512 s 75%-prefix preparation from
-  file-scoped cold state. Lead budget is conservatively frozen to 3.500 s;
-  preparation must complete and `mincore` must show >=70% residency before
-  launch.
-- Arms: no preparation and completed 75%-prefix preparation. Six AB/BA
-  counterbalanced paired blocks; 12 total trials. Each begins with owned-file
-  `POSIX_FADV_DONTNEED`, two-second settle, and <=20% cold residency.
-- Foreground command, prompt, correctness, timeout, GPU placement and cleanup
-  match E021. No global cache action, installation, retry or post-hoc sample
-  expansion is allowed.
+- Six counterbalanced three-arm blocks, 18 valid trials.
+- Every arm starts at verified file residency <=20%. The active arms read exactly 75% of model bytes.
+- `completed`: begin prefetch, require worker completion and >=70% residency before a 0.8 s arrival; otherwise stop.
+- `concurrent`: begin the same prefetch and launch immediately at arrival; require the worker to be active at arrival, otherwise stop.
+- Record request-visible latency from arrival (including residency readback), trigger-to-OK, bytes, preparation duration, residency, worker state, correctness and cleanup.
 
 ## Decision
 
-`lead3500` qualifies on the held-out model only if all trials are correct and
-clean, at least five of six paired request-latency contrasts are negative, the
-paired median reduction is >=10%, and a fixed-seed 10,000-resample block
-bootstrap 95% interval for `lead3500 - none` excludes zero. Otherwise the
-cross-model confirmation is No-Go. Either outcome is still not a controller,
-total-work, or cross-device result.
+Completed-preparation replication requires at least five of six completed-minus-none contrasts negative, paired median request-latency reduction >=10%, and a fixed-seed 95% block-bootstrap interval excluding zero. Concurrent-fill is reported separately and cannot be merged with completed-preparation evidence. Any identity, state, correctness or residue failure is No-Go for the gate.
+
+This is one-model/one-host mechanism separation, not a controller or generalization result.
