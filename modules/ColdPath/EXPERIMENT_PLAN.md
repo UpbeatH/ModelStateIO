@@ -23,3 +23,7 @@ The model-residency materiality gate passed on g129. See `experiments/MSIO-CP-E0
 Inspect existing source/runtime capabilities and freeze a safe storage-cold protocol with at least two semantically distinct paths. E002 is read-only and must not start a model request. Do not install or patch software, drop global caches, remount filesystems, or use raw devices under the current authority. Stop if distinct paths cannot be exposed without one of those actions.
 
 E002 stopped with a technical NO-GO: the current runtime exposed no supported second path with effective-setting readback. Internal binary symbols are not a path implementation. Do not rerun with undocumented API fields.
+
+## Stage E006 — load-mode realization gate
+
+The later isolated llama.cpp revision on g130 documents `mmap`, `none`, and `dio` loading modes, so E002's runtime-specific platform conclusion is stale for that binary. E006 performs one correctness-only smoke per mode and uses path-filtered open-call receipts to require `O_DIRECT` for `dio`. It does not clear caches or compare timing. Only a PASS can justify designing a randomized repeated loading-path measurement protocol.
