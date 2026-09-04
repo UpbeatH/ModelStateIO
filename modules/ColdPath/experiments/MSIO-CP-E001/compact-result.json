@@ -1,0 +1,13 @@
+{
+  "evidence_level": "model_residency_materiality_only",
+  "valid_pairs": 5,
+  "cold_load_ms": [2271.260143, 2235.430492, 2233.502794, 2221.255436, 2299.459528],
+  "warm_load_ms": [25.724025, 28.43954, 28.246429, 27.025583, 26.142288],
+  "cold_total_ms": [2405.820281, 2368.523206, 2365.235491, 2354.545399, 2434.405211],
+  "warm_total_ms": [54.224646, 56.629747, 56.069681, 56.595481, 56.039208],
+  "median_cold_load_ms": 2235.430492,
+  "median_warm_load_ms": 27.025583,
+  "cold_warm_load_ratio": 82.71534760230703,
+  "decision": "PASS"
+}
+

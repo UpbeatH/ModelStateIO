@@ -1,0 +1,38 @@
+{
+  "line": "ModelStateIO",
+  "evidence_level": "design_qualification_only",
+  "cluster_active": false,
+  "routes": [
+    {
+      "name": "ColdPath",
+      "status": "local_active",
+      "question": "Which model-loading data path minimizes held-out p95 readiness latency under changing memory, storage, and reuse context?",
+      "hypothesis": "Typed dependencies and measured path costs enable a safe selector to beat the best fixed deployable path.",
+      "primary_metric": "p95_time_to_ready",
+      "strong_baselines": ["framework_default", "mmap_page_cache", "buffered_prefetch", "direct_async_if_supported", "offline_oracle"],
+      "go_rule": ">=10% median improvement with a 95% interval excluding zero and <=5% foreground p99 harm",
+      "no_go_rule": "stop if ordinary readahead explains the gain or held-out groups fail"
+    },
+    {
+      "name": "StateTier",
+      "status": "queued",
+      "question": "Is state identity necessary for model-state residency decisions across HBM, DRAM, and NVMe?",
+      "hypothesis": "Different lifecycle semantics cause action preference reversals under equal pressure.",
+      "primary_metric": "held_out_p95_ttft",
+      "strong_baselines": ["capacity_matched_static_partition", "independent_lru_lfu", "state_specific_policy", "offline_oracle"],
+      "go_rule": ">=10% improvement and >=50% effect retention on held-out mixes",
+      "no_go_rule": "stop if no action reversal exists or independent policies match the unified contract"
+    },
+    {
+      "name": "LoadShield",
+      "status": "queued",
+      "question": "Can model-state-aware admission protect foreground p99 under concurrent state I/O without unacceptable throughput loss?",
+      "hypothesis": "A measured affected-set and slack contract outperforms per-job greedy loading.",
+      "primary_metric": "foreground_p99_slo_violation_rate",
+      "strong_baselines": ["fifo", "work_conserving_greedy", "fixed_io_cap", "shortest_remaining_load", "deadline_slack", "offline_oracle"],
+      "go_rule": ">=30% lower violation rate with >=90% useful throughput",
+      "no_go_rule": "stop if no reproducible affected set exists or fixed capping matches the policy"
+    }
+  ]
+}
+
