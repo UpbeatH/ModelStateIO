@@ -17,4 +17,4 @@ Build an isolated `llama-cli` capable of exposing documented `--mmap`/`--no-mmap
 
 - Stop on source identity mismatch, build failure, CUDA compiler incompatibility, unexpected writes outside the two roots, non-idle GPU before smoke test, or any need for elevated privileges.
 - Post-build smoke scope: `llama-cli --help` only. Do not download models or run inference in E003.
-- PASS requires exact Git commit, clean source worktree, successful CUDA build, `llama-cli --help` exposing mmap controls, and `ldd` with no missing libraries.
+- PASS requires source identity through the official pinned archive URL plus the frozen SHA-256 above (an extracted source archive has no Git worktree metadata), successful CUDA build, `llama-cli --help` exposing mmap controls, and `ldd` with no missing libraries.
