@@ -42,9 +42,8 @@ This is not yet an established gap. Direct prior art already exploits KV semanti
 
 ## Portfolio order and publication logic
 
-- First local/real candidate: `ColdPath`, because it has the cheapest causal experiment and can falsify the platform fit quickly.
+- First local/real candidate in this branch: `StateTier`; `ColdPath` is being validated by another authorized branch. StateTier starts with the state-identity necessity gate, not a full controller.
 - Second candidate: `LoadShield` only if ColdPath exposes reproducible externality; otherwise test `StateTier`'s state-identity necessity gate.
 - `StateTier` is the broadest and highest-overlap route; it stays unactivated until its necessity test passes.
 - Graduation safety target: each route must be independently publishable. A mature CCF B evidence package is preferred to premature CCF A scope expansion; venue rating must be checked against the designated local CCF directory when submission planning begins.
-- Exactly one line may consume cluster time. At present that remains PFSOpt; ModelStateIO is local-only.
-
+- Exactly one line may consume cluster time. At present that remains PFSOpt; ModelStateIO is local-only. Node 127 is only a provisionally selected audit target for a future separately authorized packet.

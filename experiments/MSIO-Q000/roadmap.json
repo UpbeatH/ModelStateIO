@@ -5,7 +5,7 @@
   "routes": [
     {
       "name": "ColdPath",
-      "status": "local_active",
+      "status": "queued_other_branch",
       "question": "Which model-loading data path minimizes held-out p95 readiness latency under changing memory, storage, and reuse context?",
       "hypothesis": "Typed dependencies and measured path costs enable a safe selector to beat the best fixed deployable path.",
       "primary_metric": "p95_time_to_ready",
@@ -15,7 +15,7 @@
     },
     {
       "name": "StateTier",
-      "status": "queued",
+      "status": "local_active",
       "question": "Is state identity necessary for model-state residency decisions across HBM, DRAM, and NVMe?",
       "hypothesis": "Different lifecycle semantics cause action preference reversals under equal pressure.",
       "primary_metric": "held_out_p95_ttft",
@@ -35,4 +35,3 @@
     }
   ]
 }
-
