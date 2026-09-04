@@ -25,3 +25,8 @@
   not the prior unified multi-state StateTier route.
 - Next exact gate: freeze and run the smallest two-model, `mmap` versus `none`,
   equal-budget WeightResidency falsification protocol after a new host audit.
+- MSIO-WR-E001 completed after a fresh g127 audit: 12/12 correct, three paired
+  blocks per isolated 0.5B and 7B model. `none` was consistently slower, but
+  median relative contrasts were only 7.5% and 4.6%, below the frozen 10% Go
+  threshold. Decision: `NO-GO` for this bounded loading-path hypothesis; no
+  post-hoc repetitions or pressure expansion.
