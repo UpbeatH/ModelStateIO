@@ -11,14 +11,18 @@ Date: 2026-09-04 (Asia/Shanghai). Target: `g127-chenhao`.
   read-only audit found CUDA toolkits 11.2, 12.2, 12.8, and 12.9 under
   `/usr/local`; `/usr/local/cuda` points to 12.8. No existing `llama-cli` or
   `llama-server` was found in the searched user/storage paths.
-- Models: the Ollama registry still contains only `qwen2.5:7b`, but a separate
-  `qwen2.5-0.5b-instruct-q4_k_m.gguf` was placed in the user-owned runtime
-  model root. It is 491,400,032 bytes and has SHA-256
+- Models: the Ollama registry still contains only `qwen2.5:7b`, but two GGUF
+  footprints now exist in the user-owned runtime model root. The 0.5B
+  `qwen2.5-0.5b-instruct-q4_k_m.gguf` is 491,400,032 bytes and has SHA-256
   `74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db`.
   Its immediate provenance is the verified user-owned source copy
   `/mnt/nvme1/chenhao/modelstateio-runtime/incoming/` on g130; the original
   slow Windows-to-g127 transfer was stopped and its 23,592,960-byte partial
-  target was removed before this copy. The model begins with the `GGUF` magic.
+  target was removed before this copy. The 7B
+  `qwen2.5-7b-instruct-q4_k_m.gguf` is a verified 4,683,073,952-byte,
+  SHA-256 `2bada8a7450677000f678be90653b85d364de7db25eb5ea54136ada5f3933730`
+  copy of the read-only local Ollama blob; the source and service were not
+  altered. Both files begin with the `GGUF` magic.
 - Storage: `/mnt/nvme3n1` has about 1.2 TB free and the user-owned
   `modelstateio-runtime` directory exists, but the device is shared with
   Kubernetes/MinIO mounts.
@@ -38,6 +42,8 @@ Date: 2026-09-04 (Asia/Shanghai). Target: `g127-chenhao`.
   R` using `-ngl 99` under `mmap`, `none`, and requested `dio` modes. Each
   returned `R` with exit code zero; these are capability/correctness receipts,
   not performance measurements.
+- The isolated 7B copy also completed the same direct llama.cpp `mmap` smoke
+  with GPU offload and exit code zero.
 - Effective-setting receipt: `strace` showed a 491,400,032-byte file-backed
   `MAP_SHARED|MAP_POPULATE` mapping for requested `mmap`, while requested
   `none` did not show a model-file mmap. Thus `mmap` and non-mmap are two
