@@ -5,4 +5,5 @@
 - Evidence: current node observation plus hypothesis only; no StateTier performance result.
 - E000 preflight reached `NOT_RUN`: no verified multi-state trace was found and `/mnt/nvme3n1` is shared with active Kubernetes/MinIO services. No scientific hypothesis was tested.
 - Follow-up inspection of the only candidate JSONL confirmed it is a generic `idx/ttft/metric/text` result (SHA-256 recorded in `RESULT.md`), not a StateTier trace.
+- T001 collection qualification also reached `NOT_RUN`: observation tools and Ollama are present, but the proposed external directory is absent, root-owned shared storage is ambiguous, and no workload was started.
 - Next exact gate: obtain a provenance-verified trace with at least two state classes, or stop/re-scope to a bounded single-state experiment.
