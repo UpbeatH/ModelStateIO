@@ -1,12 +1,11 @@
 {
   "experiment": "MSIO-CP-E022R1",
-  "decision": "PASS",
+  "decision": "PASS_MECHANISM_SEPARATION",
   "valid_trials": 18,
-  "correct_trials": 18,
-  "concurrent_active_at_arrival": "6/6",
   "completed_minus_none_median_s": -0.3454290810,
   "completed_minus_none_ci95_s": [-0.4572405119, -0.1611211340],
   "concurrent_minus_none_median_s": -0.3839898266,
   "concurrent_minus_none_ci95_s": [-0.5309737389, -0.1501075574],
+  "concurrent_active_at_arrival": 6,
   "raw_receipts_sha256": "f77b6bd5aa17296a30e8e0ef21f1d145ff36f70fc7892d69aa64169b522d2cfa"
 }
