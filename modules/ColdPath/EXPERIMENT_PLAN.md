@@ -21,3 +21,5 @@ The model-residency materiality gate passed on g129. See `experiments/MSIO-CP-E0
 ## Stage E002 — next gate
 
 Inspect existing source/runtime capabilities and freeze a safe storage-cold protocol with at least two semantically distinct paths. E002 is read-only and must not start a model request. Do not install or patch software, drop global caches, remount filesystems, or use raw devices under the current authority. Stop if distinct paths cannot be exposed without one of those actions.
+
+E002 stopped with a technical NO-GO: the current runtime exposed no supported second path with effective-setting readback. Internal binary symbols are not a path implementation. Do not rerun with undocumented API fields.
