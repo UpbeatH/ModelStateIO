@@ -17,4 +17,11 @@
 - I001 audit corrected: CUDA toolkits 11.2/12.2/12.8/12.9 are installed on 127 but `nvcc` is absent from PATH; `/usr/local/cuda` points to 12.8. No dependency or service change was performed. Building with an absolute toolkit path is feasible; the second-model input remains missing.
 - Final decision 2026-09-04: `NO-GO` for the unified multi-state StateTier route under the current Ollama/V100S platform. The preregistered stop condition was met: no second independently controllable state class was observable after the T001/T002 probes. This is a scientific scope decision, not a claim that typed state management is impossible elsewhere.
 - Downgrade path: retain a separately scoped single-state cold/warm weight-residency study only if a new protocol and contribution are authored; do not call it StateTier multi-state evidence.
-- Next exact gate: obtain a provenance-verified trace with at least two state classes, or stop/re-scope to a bounded single-state experiment.
+- I001 re-entry environment result: a user-local CUDA llama.cpp build and a
+  second 0.5B GGUF footprint are now available on g127. `mmap` versus `none`
+  have distinct syscall-level loading receipts and GPU correctness smokes; the
+  requested `dio` path did not produce observed `O_DIRECT` and is excluded.
+  This reopens only the separately scoped single-state WeightResidency study,
+  not the prior unified multi-state StateTier route.
+- Next exact gate: freeze and run the smallest two-model, `mmap` versus `none`,
+  equal-budget WeightResidency falsification protocol after a new host audit.

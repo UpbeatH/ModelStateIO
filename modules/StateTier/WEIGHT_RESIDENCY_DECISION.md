@@ -25,3 +25,12 @@ storage root, or (b) a new, explicitly bounded research question whose
 novelty and CCF-B evidence requirements are re-justified. Do not continue
 automatic pressure repetitions under the current interface.
 
+## Re-entry audit (2026-09-04)
+
+The environmental part of condition (a) is now met for a new, bounded study:
+g127 has a user-local CUDA llama.cpp runtime, a separately stored 0.5B GGUF
+model, and syscall-level receipts distinguishing `mmap` from `none`. Requested
+`dio` did not show `O_DIRECT` and is not an eligible treatment. The old
+Ollama-only No-Go remains the historical decision for the multi-state claim;
+this audit authorizes only protocol authoring and a new falsification gate for
+single-state WeightResidency.
