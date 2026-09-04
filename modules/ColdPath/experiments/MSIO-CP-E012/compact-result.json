@@ -1,0 +1,11 @@
+{
+  "decision": "PASS_PROVENANCE_ONLY",
+  "experiment": "MSIO-CP-E009R1",
+  "valid_trials": 18,
+  "modes": {
+    "mmap": {"n": 6, "robust_cv": 0.1030115013},
+    "none": {"n": 6, "robust_cv": 0.1601404472},
+    "dio": {"n": 6, "robust_cv": 0.0483477460}
+  },
+  "reproduced_decision": "NO_GO"
+}
