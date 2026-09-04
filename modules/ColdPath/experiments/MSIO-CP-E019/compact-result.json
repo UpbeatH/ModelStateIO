@@ -1,0 +1,13 @@
+{
+  "decision": "GO",
+  "experiment": "MSIO-CP-E019",
+  "valid_trials": 30,
+  "blocks": 6,
+  "negative_spearman_blocks": 6,
+  "block_spearman": [-0.9, -0.9, -0.7, -1.0, -0.6, -0.1],
+  "median_block_spearman": -0.8,
+  "median_time_to_ok_s": {"0.00": 2.8241253905, "0.25": 2.604086189, "0.50": 2.6665597915, "0.75": 2.5083346745, "1.00": 2.440107721},
+  "full_prefetch_benefit_s": 0.3840176695,
+  "partial_benefit_recovery": {"0.25": 0.5729923880, "0.50": 0.4103082007, "0.75": 0.8223338171},
+  "raw_receipts_sha256": "274732ecdd22ee7cac2ad201c52b63833f19757674464d2b10c55f4a0e2344a1"
+}
