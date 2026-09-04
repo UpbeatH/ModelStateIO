@@ -15,8 +15,10 @@ Date: 2026-09-04 (Asia/Shanghai). Target: `g127-chenhao`.
 
 The directory prerequisite was later satisfied by explicit user authorization and ownership verification. Two bounded `ollama run qwen2.5:7b` probes were then attempted. Both timed out after 90 seconds with exit code 124, produced empty stdout, and generated no model-state trace. The process wrapper exited cleanly; iostat and SHA-256 receipts were written under the external run directory.
 
-Decision: `TECHNICAL_FAILURE / NOT_RUN_FOR_SCIENCE`. This is a runtime/observability failure, not evidence for or against the StateTier hypothesis.
+The diagnostic HTTP API probe then succeeded. A cold `qwen2.5:7b` request returned `READY` in about 7.98 s, including about 7.86 s model-load time; a warm request returned `W` in about 0.26 s. Both returned valid JSON and one generated token. These are real cold/warm weight-residency observations, not a multi-state trace.
+
+Decision: `PARTIAL`. The API path is usable and the weight cold/warm lifecycle is observable, but no KV/Adapter/Expert state was exposed. The StateTier necessity hypothesis remains untested.
 
 ## Next gate
 
-Diagnose the Ollama timeout without changing system configuration: first perform a read-only health/API check and verify whether the service can answer a trivial request within a short bound; then test the existing model with a separately frozen packet. Do not repeat the 90-second probes unchanged. A weights-only trace remains `PARTIAL` and cannot test the multi-state hypothesis.
+Next: freeze a narrow API-based packet to expose a second state class (KV or adapter) using only supported existing interfaces. If no second class can be observed, stop the unified StateTier route and re-scope to a cold/warm weight-residency study.
