@@ -1,0 +1,1 @@
+{"experiment":"MSIO-CP-E027","decision":"bounded_overlap_accounting_only","e025_mean_trigger_to_ok_s":{"fixed75":2.99,"none":3.136},"e026r1_mean_trigger_to_ok_s":{"fixed75":5.094,"none":6.857},"excluded":"E023 lacks compatible notice/arrival/background fields","no_claim":"CPU, DRAM, energy, cache displacement, tenant interference, or general total cost"}
