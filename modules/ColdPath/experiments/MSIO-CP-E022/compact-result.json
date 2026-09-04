@@ -1,0 +1,10 @@
+{
+  "experiment": "MSIO-CP-E022",
+  "completed_preparation_decision": "PASS",
+  "concurrent_fill_decision": "TECHNICAL_NO_GO",
+  "valid_trials": 18,
+  "completed_minus_none_median_s": -0.3775581461,
+  "completed_minus_none_ci95_s": [-0.5472161290, -0.0759945636],
+  "completed_negative_blocks": 5,
+  "raw_receipts_sha256": "b66eef865f3038ca920eabeace859f9b9b22608319d605cfe35e442d20caf720"
+}
