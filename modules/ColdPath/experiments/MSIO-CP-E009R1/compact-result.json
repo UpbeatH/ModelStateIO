@@ -1,0 +1,33 @@
+{
+  "decision": "NO_GO",
+  "expected_trials": 18,
+  "experiment": "MSIO-CP-E009R1",
+  "modes": {
+    "dio": {
+      "mad_time_to_ok_s": 0.0840667795,
+      "max_time_to_ok_s": 2.983369307,
+      "median_time_to_ok_s": 2.5779362565,
+      "min_time_to_ok_s": 1.447984682,
+      "n": 6,
+      "robust_cv": 0.04834774598
+    },
+    "mmap": {
+      "mad_time_to_ok_s": 0.167211902,
+      "max_time_to_ok_s": 2.775815293,
+      "median_time_to_ok_s": 2.4066086095,
+      "min_time_to_ok_s": 2.217885631,
+      "n": 6,
+      "robust_cv": 0.1030115013
+    },
+    "none": {
+      "mad_time_to_ok_s": 0.2839222165,
+      "max_time_to_ok_s": 2.993186467,
+      "median_time_to_ok_s": 2.628586879,
+      "min_time_to_ok_s": 2.337850151,
+      "n": 6,
+      "robust_cv": 0.1601404472
+    }
+  },
+  "valid_trials": 18
+}
+
