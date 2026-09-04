@@ -34,4 +34,6 @@ E008R1 passed after correcting the E008 shell integration defect. E009 is the ne
 
 E007 stopped at 11/18 because its driver did not identify the exact guard failure. E008 is a local-only runner-observability correction with explicit stop reasons, PID/command snapshots, and bounded cleanup-settle branches; it must pass before any new repeated measurement ID.
 
+E008R1 passed after correcting the E008 shell integration defect. E009 stopped after 10 valid trials because its full-command process guard matched the SSH inspection command itself; E009 remains closed. E009R1 is the new ID using exact executable matching.
+
 E008 generated the expected fixture receipts but its transferred shell parser had a quoting defect. E008R1 is the new-ID integration correction using shell-native receipt checks; E007 and E008 remain closed.
