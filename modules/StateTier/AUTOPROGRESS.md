@@ -20,3 +20,6 @@ This line is configured for continuation across task turns until a registered
   `GO`/`NO-GO`, or when a missing external authority/input cannot be resolved
   within the current scope. The current unified multi-state route has reached
   `NO-GO` on 2026-09-04; any single-state downgrade requires a new protocol.
+- The WeightResidency/ColdPath validation on g127 also reached `NO-GO` for
+  CCF-B evidence on 2026-09-04. Automatic progression is stopped; re-entry
+  requires a new protocol and explicit scope review.
