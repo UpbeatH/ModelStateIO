@@ -1,0 +1,12 @@
+{
+  "decision": "NO_GO_CONTENT_PLACEMENT",
+  "experiment": "MSIO-CP-E020",
+  "valid_trials": 24,
+  "blocks": 6,
+  "median_time_to_ok_s": {"none": 2.7260239115, "prefix": 2.583156028, "suffix": 2.6032483185, "striped": 2.6745812415},
+  "suffix_vs_prefix_median_relative_difference": 0.0153197167,
+  "suffix_vs_prefix_ci99": [-0.1120357057, 0.0396128231],
+  "striped_vs_prefix_median_relative_difference": -0.0099925411,
+  "striped_vs_prefix_ci99": [-0.0697318990, 0.0448933667],
+  "raw_receipts_sha256": "92e0882de5aa022d06b50300d00499c232515aaaecff97c7d3d2bf943e537fa1"
+}
