@@ -30,6 +30,8 @@ The later isolated llama.cpp revision on g130 documents `mmap`, `none`, and `dio
 
 E006 passed. E007 is the prospective warm-state measurement qualification: six counterbalanced three-arm blocks, process-start-to-first-exact-response instrumentation, frozen correctness checks, and a robust-CV threshold. It decides only whether the measurement is stable enough for a later comparison; it does not rank paths.
 
+E008R1 passed after correcting the E008 shell integration defect. E009 is the new repeated warm-state measurement ID; it reuses only hash-pinned E007 measurement code and adds structured before/after PID-command-GPU receipts plus a bounded three-snapshot cleanup settle.
+
 E007 stopped at 11/18 because its driver did not identify the exact guard failure. E008 is a local-only runner-observability correction with explicit stop reasons, PID/command snapshots, and bounded cleanup-settle branches; it must pass before any new repeated measurement ID.
 
 E008 generated the expected fixture receipts but its transferred shell parser had a quoting defect. E008R1 is the new-ID integration correction using shell-native receipt checks; E007 and E008 remain closed.
