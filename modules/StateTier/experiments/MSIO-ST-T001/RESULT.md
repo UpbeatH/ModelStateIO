@@ -13,9 +13,10 @@ Date: 2026-09-04 (Asia/Shanghai). Target: `g127-chenhao`.
 
 ## Decision
 
-`NOT_RUN`. The packet requires a user-owned or explicitly isolated external data directory before starting a workload. Creating a directory under the shared root would make ownership and interference ambiguous. No model run, `strace`, file creation, configuration change, installation, or service restart was performed.
+The directory prerequisite was later satisfied by explicit user authorization and ownership verification. Two bounded `ollama run qwen2.5:7b` probes were then attempted. Both timed out after 90 seconds with exit code 124, produced empty stdout, and generated no model-state trace. The process wrapper exited cleanly; iostat and SHA-256 receipts were written under the external run directory.
+
+Decision: `TECHNICAL_FAILURE / NOT_RUN_FOR_SCIENCE`. This is a runtime/observability failure, not evidence for or against the StateTier hypothesis.
 
 ## Next gate
 
-Obtain an explicitly isolated, writable experiment directory with an ownership marker and service-interference clearance, or revise the packet to use an approved existing data root. Then repeat the complete preflight immediately before collection. A weights-only trace remains `PARTIAL` and cannot test the multi-state hypothesis.
-
+Diagnose the Ollama timeout without changing system configuration: first perform a read-only health/API check and verify whether the service can answer a trivial request within a short bound; then test the existing model with a separately frozen packet. Do not repeat the 90-second probes unchanged. A weights-only trace remains `PARTIAL` and cannot test the multi-state hypothesis.
