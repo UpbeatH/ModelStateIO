@@ -8,4 +8,5 @@
 - T001 collection qualification also reached `NOT_RUN`: observation tools and Ollama are present, but the proposed external directory is absent, root-owned shared storage is ambiguous, and no workload was started.
 - After explicit directory authorization, two `qwen2.5:7b` collection probes both timed out at 90 seconds with empty output (exit 124). Classified as technical failure; no scientific evidence was obtained.
 - An API-based diagnostic succeeded: cold request ~7.98 s (load ~7.86 s), warm request ~0.26 s, both correct. Classified `PARTIAL` because only weight residency was observed; no second state class was exposed.
+- T002 API context probe succeeded: model residency and a 32,768-token context limit were visible; a second request returned in ~0.21 s. No KV byte/residency/eviction signal was exposed, so the multi-state hypothesis remains untested.
 - Next exact gate: obtain a provenance-verified trace with at least two state classes, or stop/re-scope to a bounded single-state experiment.
