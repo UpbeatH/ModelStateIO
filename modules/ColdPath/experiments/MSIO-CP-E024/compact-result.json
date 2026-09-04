@@ -1,0 +1,16 @@
+{
+  "experiment": "MSIO-CP-E024",
+  "decision": "technical_policy_observability_pass_performance_confirmation_no_go",
+  "trials": 27,
+  "exact_ok": 27,
+  "raw_receipts_sha256": "30311c8ee6e69615092dc2d791aac090cbab5dc9b65976ed21a0d9564c10f409",
+  "guarded_abstain_insufficient": "3/3",
+  "guarded_trigger_announced_1_1s": "6/6",
+  "guarded_arrival_state_triggered": "6/6 completed at 75.0% residency",
+  "median_guarded_minus_none_s": {
+    "insufficient_known": 0.181,
+    "early_arrival_error": -0.196,
+    "accurate_sufficient": 0.036
+  },
+  "limitation": "Early-arrival-error trials completed before arrival; accurate-sufficient has only three pairs and did not directionally replicate benefit."
+}
