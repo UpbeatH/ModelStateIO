@@ -1,0 +1,12 @@
+{
+  "experiment": "MSIO-CP-E023",
+  "decision": "PASS",
+  "model": "7B-Q4_K_M",
+  "valid_trials": 12,
+  "correct_trials": 12,
+  "negative_blocks": 6,
+  "lead3500_minus_none_median_s": -2.1271070085,
+  "lead3500_minus_none_reduction_pct": 35.5073210973,
+  "lead3500_minus_none_ci95_s": [-2.5536797340, -1.5667900225],
+  "raw_receipts_sha256": "5c84268eb7a77d3cd88196e2fa2460edc96ec9672f2fc6bec3af2e80d603cfc6"
+}
