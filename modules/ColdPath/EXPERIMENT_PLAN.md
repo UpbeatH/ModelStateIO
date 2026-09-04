@@ -27,3 +27,5 @@ E002 stopped with a technical NO-GO: the current runtime exposed no supported se
 ## Stage E006 — load-mode realization gate
 
 The later isolated llama.cpp revision on g130 documents `mmap`, `none`, and `dio` loading modes, so E002's runtime-specific platform conclusion is stale for that binary. E006 performs one correctness-only smoke per mode and uses path-filtered open-call receipts to require `O_DIRECT` for `dio`. It does not clear caches or compare timing. Only a PASS can justify designing a randomized repeated loading-path measurement protocol.
+
+E006 passed. E007 is the prospective warm-state measurement qualification: six counterbalanced three-arm blocks, process-start-to-first-exact-response instrumentation, frozen correctness checks, and a robust-CV threshold. It decides only whether the measurement is stable enough for a later comparison; it does not rank paths.
