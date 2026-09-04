@@ -4,11 +4,8 @@ set -euo pipefail
 runtime_root=/mnt/nvme1/chenhao/modelstateio-runtime
 experiment_root="$runtime_root/logs/MSIO-CP-E004"
 lock_root="$runtime_root/locks/MSIO-CP-E004.lock"
-model_root="$runtime_root/models/Qwen2.5-0.5B-Instruct-GGUF-df5bf013"
-model_file="$model_root/qwen2.5-0.5b-instruct-q4_k_m.gguf"
-partial_file="$model_file.part"
+model_file="$runtime_root/incoming/qwen2.5-0.5b-instruct-q4_k_m.gguf"
 binary_file="$runtime_root/build-d230ddd-cuda116-sm70/bin/llama-cli"
-model_url=https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/df5bf01389a39c743ab467d734bf501681e041c5/qwen2.5-0.5b-instruct-q4_k_m.gguf
 expected_binary=39a6fb1233811c9d6bf5d646ec17f810562a9f78eb6a9cb558940479913dbe24
 expected_model=74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db
 
@@ -19,20 +16,13 @@ if ! mkdir "$lock_root" 2>/dev/null; then
 fi
 trap 'rmdir "$lock_root" 2>/dev/null || true' EXIT
 
-mkdir -p "$experiment_root" "$model_root"
+mkdir -p "$experiment_root"
 test "$(sha256sum "$binary_file" | cut -d' ' -f1)" = "$expected_binary"
 test "$(df --output=avail -B1 "$runtime_root" | tail -n1)" -ge 2147483648
 test "$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits | tr -d ' ')" -le 16
 LD_LIBRARY_PATH=/usr/local/cuda-11.6/lib64 ldd "$binary_file" > "$experiment_root/ldd-cuda116.txt"
 grep -q '/usr/local/cuda-11.6/lib64/libcudart' "$experiment_root/ldd-cuda116.txt"
 grep -q '/usr/local/cuda-11.6/lib64/libcublas' "$experiment_root/ldd-cuda116.txt"
-
-if test ! -f "$model_file"; then
-  curl --fail --location --proxy http://127.0.0.1:7897 --connect-timeout 20 --max-time 1800 --retry 2 --retry-delay 5 --continue-at - --output "$partial_file" "$model_url"
-  test "$(stat -c %s "$partial_file")" = 491400032
-  test "$(sha256sum "$partial_file" | cut -d' ' -f1)" = "$expected_model"
-  mv "$partial_file" "$model_file"
-fi
 
 test "$(stat -c %s "$model_file")" = 491400032
 test "$(sha256sum "$model_file" | cut -d' ' -f1)" = "$expected_model"
