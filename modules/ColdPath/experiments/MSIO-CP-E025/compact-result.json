@@ -1,0 +1,12 @@
+{
+  "experiment": "MSIO-CP-E025",
+  "decision": "adversarial_concurrency_qualification_pass",
+  "trials": 12,
+  "exact_ok": 12,
+  "raw_receipts_sha256": "64562545079f976112b246c88c6d71ccc7c71ff950eaf69255f3bf7d83be23b7",
+  "fixed_active_at_arrival": "6/6",
+  "fixed_under_70pct_resident_at_arrival": "6/6",
+  "median_fixed_minus_none_arrival_to_ok_s": -0.122,
+  "negative_paired_contrasts": "5/6",
+  "scope": "Descriptive single-host missed-deadline concurrency evidence only."
+}
