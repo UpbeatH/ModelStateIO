@@ -7,6 +7,7 @@ BINARY=ROOT/'build-d230ddd-cuda116-sm70/bin/llama-cli'; MEASURE=ROOT/'incoming/m
 OUT=ROOT/'logs/MSIO-CP-E021'; RAW=OUT/'raw'; CHUNK=8<<20; FRACTION=.75
 ORDERS=[['none','lead0','lead300','lead700'],['lead0','lead300','lead700','none'],['lead300','lead700','none','lead0'],['lead700','none','lead0','lead300'],['none','lead700','lead300','lead0'],['lead300','lead0','none','lead700']]
 DELAYS={'lead0':0.0,'lead300':.300,'lead700':.700}
+READER="import sys; p,n=sys.argv[1],int(sys.argv[2]); f=open(p,'rb',buffering=0); done=0; chunk=8<<20; \nwhile done<n:\n b=f.read(min(chunk,n-done));\n if not b: break\n done+=len(b)\nf.close(); sys.exit(0 if done==n else 2)"
 
 def sha(p):
     h=hashlib.sha256()
@@ -24,7 +25,7 @@ def main():
     if sha(MODEL)!='74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db': return 90
     if sha(BINARY)!='39a6fb1233811c9d6bf5d646ec17f810562a9f78eb6a9cb558940479913dbe24': return 91
     if OUT.exists(): return 92
-    OUT.mkdir(parents=True); RAW.mkdir(); rows=[]; size=MODEL.stat().st_size; requested=(int(size*FRACTION)//CHUNK)*CHUNK
+    OUT.mkdir(parents=True); RAW.mkdir(); rows=[]; size=MODEL.stat().st_size; requested=int(size*FRACTION)
     for bi,order in enumerate(ORDERS,1):
         for pos,arm in enumerate(order,1):
             if subprocess.run(['pgrep','-x','llama-cli'],stdout=subprocess.DEVNULL).returncode==0: return 93
@@ -33,7 +34,7 @@ def main():
                 os.posix_fadvise(f.fileno(),0,0,os.POSIX_FADV_DONTNEED); time.sleep(2); cold=resident(f.fileno(),size)
             if cold>.20: return 94
             if arm!='none':
-                triggered=time.monotonic(); worker=subprocess.Popen(['dd',f'if={MODEL}','of=/dev/null','bs=8M',f'count={requested//CHUNK}','status=none'],stdout=subprocess.DEVNULL,stderr=open(OUT/f'{trial}.dd.stderr','w'))
+                triggered=time.monotonic(); worker=subprocess.Popen([sys.executable,'-c',READER,str(MODEL),str(requested)],stdout=subprocess.DEVNULL,stderr=open(OUT/f'{trial}.prefetch.stderr','w'))
                 time.sleep(DELAYS[arm])
             with MODEL.open('rb',buffering=0) as f: at_arrival=resident(f.fileno(),size)
             active=worker is not None and worker.poll() is None
