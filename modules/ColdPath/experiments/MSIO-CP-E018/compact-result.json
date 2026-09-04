@@ -1,0 +1,13 @@
+{
+  "decision": "GO",
+  "experiment": "MSIO-CP-E018",
+  "valid_trials": 12,
+  "blocks": 6,
+  "paired_median_request_reduction": 0.13535810309195748,
+  "paired_median_reduction_ci95": [0.09883108265433219, 0.20050019324721036],
+  "median_cold_request_s": 2.8979859675,
+  "median_prefetch_request_s": 2.4999947975,
+  "median_prefetch_s": 0.6897046435624361,
+  "median_prefetch_plus_request_s": 3.1702570940624364,
+  "raw_receipts_sha256": "11c6b53c6eb52cd5f2da88f795073abbe8fb11a9b8986c14c615eae149c1b4c6"
+}
