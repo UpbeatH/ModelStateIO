@@ -7,8 +7,8 @@ Frozen: 2026-09-04.
 - Host: `g130-chenhao`, selected after read-only audit.
 - User authorization: isolated dependency installation for the ModelStateIO line, conditional on not affecting g129 cluster control.
 - Source: official GitHub archive for pinned commit `d230ddd763ffe27781c7ffd237ea78b639b36b6d`; local archive SHA-256 `2625B2172F06AB97E0B4331AC6D2FF93D76278922699212B1BE61758D27E816F`. This archive path replaces a single stalled g130 Git clone; no retry is permitted.
-- Source and build roots: `/mnt/nvme1/chenhao/modelstateio-runtime/llama.cpp-d230ddd` and `/mnt/nvme1/chenhao/modelstateio-runtime/build-d230ddd-cuda116`.
-- CUDA compiler: `/usr/local/cuda-11.6/bin/nvcc`; build type `Release`; CUDA backend enabled.
+- Source and build roots: `/mnt/nvme1/chenhao/modelstateio-runtime/llama.cpp-d230ddd` and `/mnt/nvme1/chenhao/modelstateio-runtime/build-d230ddd-cuda116-sm70`.
+- CUDA compiler: `/usr/local/cuda-11.6/bin/nvcc`; build type `Release`; CUDA backend enabled; frozen target architecture `70` (the audited g130 Tesla V100S capability).  The earlier default multi-architecture build is retained only as a stopped diagnostic log and is not an E003 result.
 - Forbidden: writing `/hpc-tools`, `/usr/local`, `/etc`, system service configuration, NVIDIA driver/CUDA alternatives, Ollama configuration/model store, Lustre mounts/settings, raw devices, or another user's directory.
 
 ## Purpose and stop rules
