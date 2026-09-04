@@ -1,0 +1,18 @@
+{
+  "decision": "NO_GO",
+  "expected_trials": 18,
+  "experiment": "MSIO-CP-E007",
+  "modes": {
+    "dio": {
+      "n": 4
+    },
+    "mmap": {
+      "n": 4
+    },
+    "none": {
+      "n": 3
+    }
+  },
+  "valid_trials": 11
+}
+
