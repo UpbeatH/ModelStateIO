@@ -1,0 +1,26 @@
+{
+  "decision": "PASS",
+  "expected_trials": 18,
+  "experiment": "MSIO-CP-E014",
+  "modes": {
+    "dio": {
+      "mad_time_to_ok_s": 0.08636638099999994,
+      "median_time_to_ok_s": 2.6522401605,
+      "n": 6,
+      "robust_cv": 0.048278733720124554
+    },
+    "mmap": {
+      "mad_time_to_ok_s": 0.06834771449999955,
+      "median_time_to_ok_s": 2.5170204734999997,
+      "n": 6,
+      "robust_cv": 0.04025883880745451
+    },
+    "none": {
+      "mad_time_to_ok_s": 0.2312070125000001,
+      "median_time_to_ok_s": 2.677939351,
+      "n": 6,
+      "robust_cv": 0.12800421212097127
+    }
+  },
+  "valid_trials": 18
+}
