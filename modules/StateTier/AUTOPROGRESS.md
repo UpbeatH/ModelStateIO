@@ -18,5 +18,5 @@ This line is configured for continuation across task turns until a registered
   and pushed after review when the remote is available.
 - Automatic progression terminates only at the preregistered StateTier
   `GO`/`NO-GO`, or when a missing external authority/input cannot be resolved
-  within the current scope.
-
+  within the current scope. The current unified multi-state route has reached
+  `NO-GO` on 2026-09-04; any single-state downgrade requires a new protocol.
