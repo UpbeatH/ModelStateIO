@@ -12,6 +12,7 @@
 - T003 passed the single-state residency capability gate: three `keep_alive=0` versus `5m` pairs were correct, with cold totals 4.665–5.408 s and warm totals 0.218–0.223 s. This is not a CCF B result; larger model/pressure/baseline validation remains required.
 - T004 model-footprint expansion is `BLOCKED_INPUT`: Ollama currently contains only qwen2.5:7b; no second model was downloaded or run.
 - T005 passed same-model footprint execution (context 2048/8192, 12 successful API requests). Cold totals were ~5.2–5.9 s and established warm totals ~0.21–0.25 s; no context-dependent residency effect was established.
+- T006 passed a bounded externality probe: a concurrent read-only 1 GiB model-blob read produced 0.212–0.243 s foreground totals versus 0.205–0.232 s for two valid warm controls; the first control was a reload and excluded. Capability evidence only, not CCF B.
 - Final decision 2026-09-04: `NO-GO` for the unified multi-state StateTier route under the current Ollama/V100S platform. The preregistered stop condition was met: no second independently controllable state class was observable after the T001/T002 probes. This is a scientific scope decision, not a claim that typed state management is impossible elsewhere.
 - Downgrade path: retain a separately scoped single-state cold/warm weight-residency study only if a new protocol and contribution are authored; do not call it StateTier multi-state evidence.
 - Next exact gate: obtain a provenance-verified trace with at least two state classes, or stop/re-scope to a bounded single-state experiment.
