@@ -32,3 +32,7 @@
   benchmarks expose per-query model outcomes/costs but no non-oracular program
   frontier, arrival, state-residency or capacity-conflict trace. They cannot
   be relabelled as CallAhead input.
+- 2026-09-06: E201 independently expanded the search to real serving and
+  agent traces (FineServe, TraceLab, AgentTrace and agent-llm-traces). Each
+  lacks at least the prospective physical-state capacity contract; CallAhead
+  remains material No-Go and no replay/controller execution is opened.

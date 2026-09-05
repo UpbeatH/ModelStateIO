@@ -40,3 +40,7 @@
   server or GPU allocation. It does not provide a lifecycle workload, capacity
   conflict, correctness oracle, isolation result or performance evidence;
   StatePatch remains a research No-Go for the current material.
+- 2026-09-06: E201 confirmed that a real lifecycle/quality/capacity corpus is
+  still absent for this candidate, while Kiln and S-LoRA already cover its
+  online hot-swap and adapter-capacity abstractions. StatePatch remains
+  research No-Go; no capacity experiment is opened from synthetic inputs.
