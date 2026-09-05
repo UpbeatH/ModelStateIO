@@ -35,3 +35,8 @@
   audit identify a new online hot-swap capability not tested by the static
   CLI route. MSIO-SP-E200 is frozen as an idle-only technical lifecycle gate;
   it cannot inherit any paper-level Go from E011.
+- 2026-09-06: E200 passed its one-shot technical lifecycle qualification:
+  online attach/detach restored the frozen base response and left no residual
+  server or GPU allocation. It does not provide a lifecycle workload, capacity
+  conflict, correctness oracle, isolation result or performance evidence;
+  StatePatch remains a research No-Go for the current material.
