@@ -13,3 +13,16 @@
   paired improvements and 10.50% median request-latency reduction. This is
   limited to one host/model and does not validate a controller. The unplanned
   lead0 observation must not be promoted without a new protocol.
+- 2026-09-05: the original controller remains closed by E024/E028. E029 tested
+  separate `RiskPrefetch` re-entry material without a GPU run. The available
+  public Qwen trace has event timing but no non-oracle notice, model/adapter
+  identity, state size, outcome, or contention fields, so the candidate is
+  inactive (NO-GO on this material). Re-entry requires a provenance-complete
+  application/scheduler trace with two or more state identities and a
+  user-scoped harm measurement.
+- 2026-09-05: E030 closed the unmodified-runtime ArrivalSplit fallback: model
+  loading and context creation share a sequential source path. E031 found a
+  documented multi-model router/LRU boundary and two private GGUF files, but no
+  admissible admission trace, user-scoped interference measure, or complete
+  7B acquisition record. Router capability passed technically; performance and
+  paper activation are NO-GO on current material.
