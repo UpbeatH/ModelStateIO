@@ -50,8 +50,16 @@ def output_text(payload: object) -> str:
 
 
 def ensure_idle(slots: object) -> None:
-    serial = json.dumps(slots, sort_keys=True).lower()
-    if '"is_processing":true' in serial or '"is_generating":true' in serial:
+    def active(value: object) -> bool:
+        if isinstance(value, dict):
+            if value.get("is_processing") is True or value.get("is_generating") is True:
+                return True
+            return any(active(child) for child in value.values())
+        if isinstance(value, list):
+            return any(active(child) for child in value)
+        return False
+
+    if active(slots):
         raise Stop("server reports an active slot before transition")
 
 
