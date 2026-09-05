@@ -31,3 +31,7 @@
   Afterwards, a separate protocol still needs a genuine lifecycle trace,
   capacity conflict, correctness oracle, and isolation/harm measurement before
   StatePatch can be evaluated as a paper candidate.
+- 2026-09-06: upstream llama.cpp source/API inspection and g130 read-only
+  audit identify a new online hot-swap capability not tested by the static
+  CLI route. MSIO-SP-E200 is frozen as an idle-only technical lifecycle gate;
+  it cannot inherit any paper-level Go from E011.

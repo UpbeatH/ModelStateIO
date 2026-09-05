@@ -28,3 +28,7 @@
   pressure, changed load/rate/window or extra repetitions. A new branch-debt
   admission candidate requires direct novelty clearance and a real
   three-model program trace with capacity conflict before any new run.
+- 2026-09-06: E200 source audit is a material No-Go. The audited public router
+  benchmarks expose per-query model outcomes/costs but no non-oracular program
+  frontier, arrival, state-residency or capacity-conflict trace. They cannot
+  be relabelled as CallAhead input.
