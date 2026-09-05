@@ -2,6 +2,31 @@
 
 Status: 2026-09-05. This file records feasibility gates, not paper claims.
 
+## CallAhead - causal mechanism No-Go
+
+CallAhead asked whether non-oracular program-frontier notice could drive a
+router-integrated model-state preparation action while explicitly charging
+transition bytes, eviction/reload debt and foreground harm. It does not reopen
+ColdPath or pool its observations into new confirmation evidence.
+
+The first research death gate is deliberately smaller than a controller: on a
+resident foreground service and a distinct low-residency background model,
+compare `none`, `eager75` and `paced75` in six counterbalanced blocks. Proceed
+only if eager preparation causes at least 10% reproducible foreground p95 harm,
+pacing removes at least half that harm, and pacing retains at least half the
+readiness benefit. Before that run, E000 must establish direct-prior-art
+separation, three provenance-complete states, router action readback, safe
+user-scoped state control and a bounded workload. See
+`../modules/CallAhead/DESIGN.md` and `../modules/CallAhead/EXPERIMENT_PLAN.md`.
+
+E000 passed literature/material/runtime qualification. E001 then completed
+all 18 frozen trials but measured only 0.12% median eager foreground p95 harm
+with 95% interval [-3.01%, 5.90%], so the affected-set and materiality clauses
+failed. The roughly 0.40 s readiness benefit does not justify a harm-aware
+pacing controller. Stop the current ladder before E002. A different
+branch-uncertainty/eviction-debt admission question may be screened only after
+direct prior-art clearance and a real three-model capacity-conflict trace.
+
 ## KVGuard — active feasibility candidate
 
 **Observation:** the audited g130 llama.cpp source contains context state
