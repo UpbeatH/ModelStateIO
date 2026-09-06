@@ -20,6 +20,13 @@
   immutable Docker image digest
   `sha256:261bbe628f4b438f5bf10de5a8ee05282f2697a5a2cb7ff7668f776b61b9d586`
   with Python 3.6.8. Host-Python execution is prohibited.
+- The bounded verifier integration smoke passed on g130: a correct candidate
+  returned `pass/0`, an incorrect candidate returned
+  `assertion_failure/20`, and no `msio-bd-e300-*` container remained. The
+  verifier uses an unprivileged UID, read-only bind/root, no network,
+  capability drop, no-new-privileges, CPU/memory/PID limits, bounded output
+  observation and forced owned-container cleanup. This is technical execution
+  qualification only, not workload or performance evidence.
 - E300 is not yet PASS: the 11 frozen official model shards are still being
   acquired and must pass size/hash, per-model loadability, measured HBM and
   physical eviction/reload checks. An unrelated g130 GPU process remains a
