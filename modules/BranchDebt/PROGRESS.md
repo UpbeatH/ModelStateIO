@@ -5,3 +5,8 @@
   provenance-complete models total about 2.66 GB and cannot establish physical
   conflict on a 32 GB V100. GPU execution is deferred while another user's
   process is present.
+- 2026-09-06: AgentTrace source was acquired read-only at commit
+  `8ce41dd7f7d2a8709b17287168bc788f291ac674` under the g130 private source
+  root. Official Qwen 7B-Q4, 14B-Q4 and 32B-Q5 shard identities are frozen;
+  their total 36.9 GB exceeds V100 HBM, pending acquisition and actual
+  per-model load/HBM measurements.
