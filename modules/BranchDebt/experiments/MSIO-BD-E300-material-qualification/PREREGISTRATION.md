@@ -70,6 +70,15 @@ repositories, into the g130 `chenhao` private runtime, with partial-file name,
 size/hash/source receipt and atomic final rename. Acquisition is not model
 loadability or capacity evidence.
 
+Per-model capacity qualification uses the pinned isolated `llama-server` with
+context 4096, all layers requested on GPU, warmup disabled, and a localhost-only
+health endpoint. It runs only from an idle-GPU precheck, verifies every shard
+against the frozen manifest, samples process HBM through `nvidia-smi`, records
+load-to-health time and forcibly cleans up only its owned PID. Measurements run
+one model at a time; their sum is a necessary capacity-pressure check, not yet
+proof of an eviction transition. A later new receipt must directly observe at
+least one demanded eviction/reload before E300 can pass.
+
 ## Safety and stopping
 
 - Only g130 private ModelStateIO paths; no g129, PFS/Lustre, system CUDA,
