@@ -47,6 +47,13 @@ failure.
   `branch_resolution_ns` after notice. A repair arrival may occur only at or
   after that resolution. This field was frozen before any E300 task outcome
   was opened.
+- The decision view is allowlisted before outcomes: task/prompt identity,
+  candidate and current resident states, dependency identity, answer identity
+  and byte length, and static syntax/function/import counts. Test outcome,
+  correctness, selected branch, resolution/arrival/completion time, post-state
+  and transition bytes are forbidden. The validator rejects both future fields
+  and any unregistered field so later policies and baselines receive identical
+  information.
 - Generated code is never executed directly on the host. The verifier must use
   an already available Docker runtime with network disabled, read-only root,
   dropped capabilities, no-new-privileges, bounded CPU/memory/PIDs/output and

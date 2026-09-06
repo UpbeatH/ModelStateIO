@@ -18,6 +18,11 @@ FORBIDDEN_DECISION_FIELDS = {
     "branch_resolution_ns", "branch_outcome", "correctness", "post_residency",
     "transition_bytes",
 }
+ALLOWED_DECISION_FIELDS = {
+    "task_id", "prompt_sha256", "candidate_state_ids", "resident_state_ids",
+    "dependency_id", "answer_sha256", "answer_bytes", "syntax_parse_ok",
+    "function_count", "import_count",
+}
 
 
 class Invalid(RuntimeError):
@@ -67,6 +72,8 @@ def validate(trace_path: Path, capacity_path: Path) -> dict[str, object]:
             view = event["decision_view"]
             if not isinstance(view, dict) or FORBIDDEN_DECISION_FIELDS & view.keys():
                 raise Invalid(f"line {line_no}: forbidden future field in decision view")
+            if set(view) - ALLOWED_DECISION_FIELDS:
+                raise Invalid(f"line {line_no}: unregistered decision-view field")
             notice = event["notice_ns"]
             resolution = event["branch_resolution_ns"]
             selected = event["selected_state_id"]

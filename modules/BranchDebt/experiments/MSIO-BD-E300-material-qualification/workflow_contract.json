@@ -21,6 +21,30 @@
     "assertion_failure": "qwen2.5-14b-instruct-q4_k_m",
     "syntax_import_timeout_resource_failure": "qwen2.5-32b-instruct-q5_k_m"
   },
+  "decision_view": {
+    "allowed": [
+      "task_id",
+      "prompt_sha256",
+      "candidate_state_ids",
+      "resident_state_ids",
+      "dependency_id",
+      "answer_sha256",
+      "answer_bytes",
+      "syntax_parse_ok",
+      "function_count",
+      "import_count"
+    ],
+    "forbidden": [
+      "branch_outcome",
+      "correctness",
+      "selected_state_id",
+      "branch_resolution_ns",
+      "arrival_ns",
+      "completion_ns",
+      "post_residency",
+      "transition_bytes"
+    ]
+  },
   "split": {
     "dedup_key": "sha256_exact_prompt",
     "development_unique_count": 300,

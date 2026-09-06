@@ -23,7 +23,15 @@ def event(index: int) -> dict:
         "arrival_ns": None if selected is None else index * 100 + 3,
         "completion_ns": None if selected is None else index * 100 + 4,
         "branch_outcome": "pass" if selected is None else "repair",
-        "correctness": True, "decision_view": {"queue_depth": 0},
+        "correctness": True, "decision_view": {
+            "task_id": f"t{index}", "prompt_sha256": "abc",
+            "candidate_state_ids": ["repair_a", "repair_b"],
+            "resident_state_ids": ["primary"],
+            "dependency_id": f"solver-{index}",
+            "answer_sha256": "def", "answer_bytes": 10,
+            "syntax_parse_ok": True, "function_count": 1,
+            "import_count": 0,
+        },
         "transition_bytes": 0 if selected is None else 10,
         "eviction_required": index == 1,
     }
