@@ -27,6 +27,36 @@ task. A delay inserted only to create lead time, a model identity attached
 after seeing the answer, or a notice reconstructed from arrival is a protocol
 failure.
 
+### Frozen MBPP realization
+
+- Task source is the MBPP prompt embedded in the pinned AgentTrace source
+  snapshot. Historical model output and timing fields are ignored.
+- `primary = Qwen2.5-7B-Instruct-Q4_K_M`, candidate frontier =
+  `{Qwen2.5-14B-Instruct-Q4_K_M, Qwen2.5-32B-Instruct-Q5_K_M}`.
+- The frontier notice is emitted immediately after the primary answer is
+  durably received and before any test is executed. Both repair candidates
+  and the dependency edge are therefore known before the branch outcome.
+- The primary answer is then checked by the frozen verifier. `pass` opens no
+  repair request; syntax/import/timeout/resource failures select the 32B
+  repair branch; assertion-only failures select the 14B repair branch. This
+  mapping is immutable after the first task outcome is opened.
+- Notice time, verifier start/end, repair arrival and completion are captured
+  from one monotonic clock. A nonzero interval must arise from real verifier
+  work; no inserted sleep qualifies.
+- Generated code is never executed directly on the host. The verifier must use
+  an already available Docker runtime with network disabled, read-only root,
+  dropped capabilities, no-new-privileges, bounded CPU/memory/PIDs/output and
+  a hard wall-clock timeout. Absence of a qualifying isolated image/runtime is
+  a technical stop, not permission to weaken isolation.
+
+### Frozen task split
+
+- Normalize tasks by SHA-256 of the exact prompt and deduplicate before split.
+- The first 300 unique tasks in source order are development/material tasks;
+  the next 100 are held out for E302 and must not be opened during E300/E301.
+- E300 may stop after 100 valid development events once all material criteria
+  pass. It may not substitute historical AgentTrace results for new events.
+
 ## Model and capacity contract
 
 The existing Qwen2.5-0.5B, Qwen2.5-1.5B and SmolLM2-1.7B artifacts qualify for

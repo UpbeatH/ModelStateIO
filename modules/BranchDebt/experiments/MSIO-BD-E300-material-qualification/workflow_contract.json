@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "clock": "monotonic_ns",
+  "task_source": {
+    "repository": "https://github.com/pagarsky/agent-trace",
+    "commit": "8ce41dd7f7d2a8709b17287168bc788f291ac674",
+    "family": "mbpp",
+    "historical_outputs_allowed": false
+  },
+  "models": {
+    "primary": "qwen2.5-7b-instruct-q4_k_m",
+    "assertion_repair": "qwen2.5-14b-instruct-q4_k_m",
+    "structural_repair": "qwen2.5-32b-instruct-q5_k_m"
+  },
+  "frontier": [
+    "qwen2.5-14b-instruct-q4_k_m",
+    "qwen2.5-32b-instruct-q5_k_m"
+  ],
+  "routing": {
+    "pass": null,
+    "assertion_failure": "qwen2.5-14b-instruct-q4_k_m",
+    "syntax_import_timeout_resource_failure": "qwen2.5-32b-instruct-q5_k_m"
+  },
+  "split": {
+    "dedup_key": "sha256_exact_prompt",
+    "development_unique_count": 300,
+    "held_out_unique_count": 100,
+    "e300_max_valid_events": 100
+  },
+  "verifier": {
+    "runtime": "docker",
+    "image": "docker.xuanyuan.me/ceph/daemon@sha256:261bbe628f4b438f5bf10de5a8ee05282f2697a5a2cb7ff7668f776b61b9d586",
+    "image_id": "sha256:6e73176320aaccf3b3fb660b9945d0514222bd7a83e28b96e8440c630ba6891f",
+    "python": "3.6.8",
+    "network": "none",
+    "read_only_root": true,
+    "cap_drop": "ALL",
+    "no_new_privileges": true,
+    "cpus": 1,
+    "memory_mib": 512,
+    "pids_limit": 64,
+    "wall_timeout_s": 10,
+    "stdout_stderr_limit_bytes": 65536,
+    "host_python_fallback": false
+  }
+}

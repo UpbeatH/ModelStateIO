@@ -1,5 +1,30 @@
 # BranchDebt progress
 
+## 2026-09-06 E300 prospective-material checkpoint
+
+- Pinned AgentTrace source commit
+  `8ce41dd7f7d2a8709b17287168bc788f291ac674` supplied 400 distinct MBPP
+  prompts with embedded executable assertions. Historical outputs and timings
+  were not imported.
+- The frozen compiler produced 300 development tasks and a hash-only receipt
+  for 100 held-out tasks. Git-external receipts on g130:
+  `development.jsonl` SHA-256
+  `be203d6e9d2a372a14bd5b3ed5ecab5c43abbc37205f3444db8b210069ba3850`;
+  `heldout-receipt.json` SHA-256
+  `2ac3ecbb8aff30d27567540d827e48bc36d1684866edf333f06017dd3552953c`.
+- The prospective workflow is now frozen as 7B primary plus a pre-verifier
+  14B/32B repair frontier. Pass opens no repair; assertion-only failure routes
+  to 14B; structural/resource failure routes to 32B. No artificial notice
+  delay is permitted.
+- Generated-code isolation is technically available through the existing
+  immutable Docker image digest
+  `sha256:261bbe628f4b438f5bf10de5a8ee05282f2697a5a2cb7ff7668f776b61b9d586`
+  with Python 3.6.8. Host-Python execution is prohibited.
+- E300 is not yet PASS: the 11 frozen official model shards are still being
+  acquired and must pass size/hash, per-model loadability, measured HBM and
+  physical eviction/reload checks. An unrelated g130 GPU process remains a
+  safety stop for GPU execution.
+
 - 2026-09-06: candidate created as a clean successor to CallAhead, not a
   reopened E001. `MSIO-BD-E300` is the only active ID. Existing three small
   provenance-complete models total about 2.66 GB and cannot establish physical
