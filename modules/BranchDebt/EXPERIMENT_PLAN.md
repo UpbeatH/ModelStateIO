@@ -15,8 +15,8 @@
 
 - Execute development tasks rather than replaying historical arrival rows.
 - Each event records event/task/node ID, notice time, candidate states,
-  dependency edge, selected branch, actual arrival/completion, correctness,
-  transition bytes and state readback.
+  dependency edge, branch-resolution time, selected branch, actual
+  arrival/completion, correctness, transition bytes and state readback.
 - Qualification requires at least 100 nonzero-notice events, a frozen
   time/task-held-out split, at least 10% wrong-branch or abstention opportunity,
   and no forbidden future field at decision time.

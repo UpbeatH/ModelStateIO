@@ -43,6 +43,10 @@ failure.
 - Notice time, verifier start/end, repair arrival and completion are captured
   from one monotonic clock. A nonzero interval must arise from real verifier
   work; no inserted sleep qualifies.
+- Every event, including a pass/no-call branch, records a distinct
+  `branch_resolution_ns` after notice. A repair arrival may occur only at or
+  after that resolution. This field was frozen before any E300 task outcome
+  was opened.
 - Generated code is never executed directly on the host. The verifier must use
   an already available Docker runtime with network disabled, read-only root,
   dropped capabilities, no-new-privileges, bounded CPU/memory/PIDs/output and

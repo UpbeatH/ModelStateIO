@@ -17,10 +17,11 @@ def event(index: int) -> dict:
     return {
         "event_id": f"e{index}", "task_id": f"t{index}", "node_id": "test",
         "notice_ns": index * 100 + 1,
+        "branch_resolution_ns": index * 100 + 2,
         "candidate_state_ids": ["repair_a", "repair_b"],
         "dependency_ids": [f"solver-{index}"], "selected_state_id": selected,
-        "arrival_ns": None if selected is None else index * 100 + 2,
-        "completion_ns": None if selected is None else index * 100 + 3,
+        "arrival_ns": None if selected is None else index * 100 + 3,
+        "completion_ns": None if selected is None else index * 100 + 4,
         "branch_outcome": "pass" if selected is None else "repair",
         "correctness": True, "decision_view": {"queue_depth": 0},
         "transition_bytes": 0 if selected is None else 10,

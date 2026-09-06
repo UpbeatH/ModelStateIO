@@ -10,12 +10,13 @@ from pathlib import Path
 REQUIRED = {
     "event_id", "task_id", "node_id", "notice_ns", "candidate_state_ids",
     "dependency_ids", "selected_state_id", "arrival_ns", "completion_ns",
-    "branch_outcome", "correctness", "decision_view", "transition_bytes",
-    "eviction_required",
+    "branch_resolution_ns", "branch_outcome", "correctness", "decision_view",
+    "transition_bytes", "eviction_required",
 }
 FORBIDDEN_DECISION_FIELDS = {
     "actual_arrival_ns", "arrival_ns", "completion_ns", "selected_state_id",
-    "branch_outcome", "correctness", "post_residency", "transition_bytes",
+    "branch_resolution_ns", "branch_outcome", "correctness", "post_residency",
+    "transition_bytes",
 }
 
 
@@ -67,18 +68,23 @@ def validate(trace_path: Path, capacity_path: Path) -> dict[str, object]:
             if not isinstance(view, dict) or FORBIDDEN_DECISION_FIELDS & view.keys():
                 raise Invalid(f"line {line_no}: forbidden future field in decision view")
             notice = event["notice_ns"]
+            resolution = event["branch_resolution_ns"]
             selected = event["selected_state_id"]
             arrival = event["arrival_ns"]
             completion = event["completion_ns"]
             if selected is None:
                 if arrival is not None or completion is not None:
                     raise Invalid(f"line {line_no}: no-call branch has call timestamps")
+                if not all(isinstance(v, int) for v in (notice, resolution)):
+                    raise Invalid(f"line {line_no}: invalid branch timestamps")
+                if not notice < resolution:
+                    raise Invalid(f"line {line_no}: branch was not resolved after notice")
             else:
                 if selected not in candidates:
                     raise Invalid(f"line {line_no}: selected state not in candidates")
-                if not all(isinstance(v, int) for v in (notice, arrival, completion)):
+                if not all(isinstance(v, int) for v in (notice, resolution, arrival, completion)):
                     raise Invalid(f"line {line_no}: invalid timestamps")
-                if not notice < arrival <= completion:
+                if not notice < resolution <= arrival <= completion:
                     raise Invalid(f"line {line_no}: notice is not prospectively earlier")
             if not isinstance(event["correctness"], bool):
                 raise Invalid(f"line {line_no}: correctness must be boolean")
