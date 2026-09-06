@@ -20,13 +20,20 @@
   immutable Docker image digest
   `sha256:261bbe628f4b438f5bf10de5a8ee05282f2697a5a2cb7ff7668f776b61b9d586`
   with Python 3.6.8. Host-Python execution is prohibited.
-- The bounded verifier integration smoke passed on g130: a correct candidate
-  returned `pass/0`, an incorrect candidate returned
-  `assertion_failure/20`, and no `msio-bd-e300-*` container remained. The
+- The bounded verifier integration smoke passed again on g130 after the
+  pre-outcome branch-entropy revision: a correct candidate returned `pass/0`,
+  one failed assertion returned `assertion_minor/31`, two failed assertions
+  returned `assertion_major/32`, and no `msio-bd-e300-*` container remained. The
   verifier uses an unprivileged UID, read-only bind/root, no network,
   capability drop, no-new-privileges, CPU/memory/PID limits, bounded output
   observation and forced owned-container cleanup. This is technical execution
   qualification only, not workload or performance evidence.
+- Before opening any E300 task outcome, the branch contract was strengthened
+  to require at least ten natural events each for no-call, 14B minor repair and
+  32B major/structural repair in the first 100 tasks. This prevents a nominal
+  two-candidate frontier from degenerating into an always-14B policy. Failure
+  of this frozen entropy gate is E300 No-Go rather than permission to reorder
+  or add tasks.
 - E300 is not yet PASS: the 11 frozen official model shards are still being
   acquired and must pass size/hash, per-model loadability, measured HBM and
   physical eviction/reload checks. A later preflight found the earlier

@@ -104,6 +104,16 @@ def validate(trace_path: Path, capacity_path: Path) -> dict[str, object]:
     opportunities = sum(event["selected_state_id"] is None for event in events)
     if opportunities / len(events) < 0.10:
         raise Invalid("fewer than 10% observed no-call/wrong-path opportunities")
+    candidate_states = set()
+    for event in events:
+        candidate_states.update(event["candidate_state_ids"])
+    per_repair = {
+        state: sum(event["selected_state_id"] == state for event in events)
+        for state in candidate_states
+    }
+    for state in candidate_states:
+        if per_repair.get(state, 0) < 10:
+            raise Invalid(f"fewer than 10 events for repair branch {state}")
     evictions = sum(event["eviction_required"] is True for event in events)
     if evictions == 0:
         raise Invalid("no measured eviction-required event")
@@ -111,6 +121,7 @@ def validate(trace_path: Path, capacity_path: Path) -> dict[str, object]:
         "decision": "PASS_MATERIAL_CONTRACT_ONLY",
         "events": len(events),
         "branch_opportunities": opportunities,
+        "repair_branch_events": per_repair,
         "eviction_required_events": evictions,
         "usable_hbm_bytes": usable,
         "state_peak_sum_bytes": sum(peaks.values()),

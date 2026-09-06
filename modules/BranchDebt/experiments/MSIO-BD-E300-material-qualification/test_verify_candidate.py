@@ -16,7 +16,8 @@ class VerifyCandidateTest(unittest.TestCase):
 
     def test_frozen_exit_classification(self):
         self.assertEqual(MODULE.classify(0), "pass")
-        self.assertEqual(MODULE.classify(20), "assertion_failure")
+        self.assertEqual(MODULE.classify(31), "assertion_minor")
+        self.assertEqual(MODULE.classify(32), "assertion_major")
         self.assertEqual(MODULE.classify(21), "syntax_failure")
         self.assertEqual(MODULE.classify(124), "timeout_failure")
         self.assertEqual(MODULE.classify(99), "sandbox_failure")

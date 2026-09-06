@@ -20,11 +20,12 @@
 - Qualification requires at least 100 nonzero-notice events, a frozen
   time/task-held-out split, at least 10% wrong-branch or abstention opportunity,
   and no forbidden future field at decision time.
-- The concrete MBPP workflow uses a 7B primary answer, emits a two-candidate
-  14B/32B repair frontier before tests, and routes assertion-only failures to
-  14B versus syntax/import/timeout/resource failures to 32B. Passing tasks are
-  the natural no-call branch. Candidate code runs only in the frozen Docker
-  verifier sandbox; a host-Python fallback is prohibited.
+- The concrete MBPP workflow uses a 7B primary answer and emits a two-candidate
+  14B/32B repair frontier before separately executing the assertions. One
+  failed assertion routes to 14B; two or more failed assertions or a structural
+  failure route to 32B; pass is the natural no-call branch. Each branch must
+  occur at least ten times in the first 100 events. Candidate code runs only in
+  the frozen Docker verifier sandbox; a host-Python fallback is prohibited.
 
 ### Phase C: physical capacity
 

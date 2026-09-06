@@ -16,9 +16,10 @@ CANDIDATES = [ASSERTION_REPAIR, STRUCTURAL_REPAIR]
 def route_verifier_classification(classification):
     if classification == "pass":
         return None
-    if classification == "assertion_failure":
+    if classification == "assertion_minor":
         return ASSERTION_REPAIR
     if classification in {
+        "assertion_major",
         "syntax_failure", "import_failure", "runtime_failure",
         "timeout_failure", "resource_failure",
     }:
@@ -60,7 +61,7 @@ def outcome_blind_view(task, answer, resident_states):
 
 def repair_prompt(task_prompt, initial_answer, failure_class):
     if failure_class not in {
-        "assertion_failure", "syntax_failure", "import_failure",
+        "assertion_minor", "assertion_major", "syntax_failure", "import_failure",
         "runtime_failure", "timeout_failure", "resource_failure",
     }:
         raise ValueError("repair prompt requires a frozen failure class")

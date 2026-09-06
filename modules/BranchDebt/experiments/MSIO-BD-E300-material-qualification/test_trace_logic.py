@@ -16,8 +16,10 @@ LOGIC = sys.modules["trace_logic"]
 class TraceLogicTest(unittest.TestCase):
     def test_routing_is_frozen(self):
         self.assertIsNone(LOGIC.route_verifier_classification("pass"))
-        self.assertEqual(LOGIC.route_verifier_classification("assertion_failure"),
+        self.assertEqual(LOGIC.route_verifier_classification("assertion_minor"),
                          LOGIC.ASSERTION_REPAIR)
+        self.assertEqual(LOGIC.route_verifier_classification("assertion_major"),
+                         LOGIC.STRUCTURAL_REPAIR)
         self.assertEqual(LOGIC.route_verifier_classification("syntax_failure"),
                          LOGIC.STRUCTURAL_REPAIR)
         with self.assertRaises(ValueError):

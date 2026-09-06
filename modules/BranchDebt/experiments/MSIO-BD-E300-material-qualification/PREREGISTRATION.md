@@ -36,9 +36,10 @@ failure.
 - The frontier notice is emitted immediately after the primary answer is
   durably received and before any test is executed. Both repair candidates
   and the dependency edge are therefore known before the branch outcome.
-- The primary answer is then checked by the frozen verifier. `pass` opens no
-  repair request; syntax/import/timeout/resource failures select the 32B
-  repair branch; assertion-only failures select the 14B repair branch. This
+- The primary answer is then checked by the frozen verifier. MBPP assertions
+  are executed separately inside the sandbox. `pass` opens no repair request;
+  exactly one failed assertion selects 14B; two or more failed assertions, or
+  syntax/import/timeout/resource failures, select 32B. This severity-based
   mapping is immutable after the first task outcome is opened.
 - Notice time, verifier start/end, repair arrival and completion are captured
   from one monotonic clock. A nonzero interval must arise from real verifier
@@ -67,6 +68,10 @@ failure.
   the next 100 are held out for E302 and must not be opened during E300/E301.
 - E300 may stop after 100 valid development events once all material criteria
   pass. It may not substitute historical AgentTrace results for new events.
+- The first 100-event material trace must contain at least ten natural no-call
+  events, ten 14B repair events and ten 32B repair events. Failure is a
+  branch-entropy NO-GO; tasks may not be added, removed or reordered to repair
+  the distribution.
 
 ## Model and capacity contract
 

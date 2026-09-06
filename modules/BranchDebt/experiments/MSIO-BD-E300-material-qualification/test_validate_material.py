@@ -13,7 +13,7 @@ SPEC.loader.exec_module(VALIDATOR)
 
 
 def event(index: int) -> dict:
-    selected = None if index % 5 == 0 else "repair_a"
+    selected = None if index % 5 == 0 else ("repair_a" if index % 2 == 0 else "repair_b")
     return {
         "event_id": f"e{index}", "task_id": f"t{index}", "node_id": "test",
         "notice_ns": index * 100 + 1,

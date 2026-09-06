@@ -14,22 +14,42 @@ from pathlib import Path
 IMAGE = "docker.xuanyuan.me/ceph/daemon@sha256:261bbe628f4b438f5bf10de5a8ee05282f2697a5a2cb7ff7668f776b61b9d586"
 WRAPPER = r"""
 import contextlib, os, sys
-path = '/work/candidate.py'
+candidate_path = '/work/candidate.py'
+tests_path = '/work/tests.py'
 try:
-    source = open(path, 'rb').read()
-    code = compile(source, path, 'exec')
+    source = open(candidate_path, 'rb').read()
+    code = compile(source, candidate_path, 'exec')
 except (SyntaxError, UnicodeError):
     sys.exit(21)
 try:
+    namespace = {'__name__': '__main__'}
     with open(os.devnull, 'w') as sink:
         with contextlib.redirect_stdout(sink), contextlib.redirect_stderr(sink):
-            exec(code, {'__name__': '__main__'})
-except AssertionError:
-    sys.exit(20)
+            exec(code, namespace)
 except (ImportError, ModuleNotFoundError):
     sys.exit(22)
 except BaseException:
     sys.exit(23)
+failed = 0
+try:
+    tests = open(tests_path, 'r').read().splitlines()
+    for line in tests:
+        if not line.strip():
+            continue
+        if not line.lstrip().startswith('assert '):
+            sys.exit(23)
+        try:
+            with open(os.devnull, 'w') as sink:
+                with contextlib.redirect_stdout(sink), contextlib.redirect_stderr(sink):
+                    exec(compile(line, tests_path, 'exec'), namespace)
+        except AssertionError:
+            failed += 1
+        except BaseException:
+            sys.exit(23)
+except BaseException:
+    sys.exit(23)
+if failed:
+    sys.exit(30 + min(failed, 30))
 sys.exit(0)
 """
 
@@ -44,31 +64,40 @@ def extract_tests(prompt):
     if marker not in prompt:
         raise ValueError("prompt has no frozen Test cases section")
     tests = prompt.split(marker, 1)[1].strip()
-    if "assert " not in tests:
+    lines = [line for line in tests.splitlines() if line.strip()]
+    if not lines or any(not line.lstrip().startswith("assert ") for line in lines):
         raise ValueError("test section has no assertions")
-    return tests + "\n"
+    return "\n".join(lines) + "\n"
 
 
 def classify(returncode):
-    return {
+    fixed = {
         0: "pass",
-        20: "assertion_failure",
         21: "syntax_failure",
         22: "import_failure",
         23: "runtime_failure",
         124: "timeout_failure",
         137: "resource_failure",
-    }.get(returncode, "sandbox_failure")
+    }
+    if returncode == 31:
+        return "assertion_minor"
+    if 32 <= returncode <= 60:
+        return "assertion_major"
+    return fixed.get(returncode, "sandbox_failure")
 
 
 def verify(prompt, answer, timeout_s=10):
-    program = extract_code(answer) + "\n" + extract_tests(prompt)
+    program = extract_code(answer)
+    tests_text = extract_tests(prompt)
     with tempfile.TemporaryDirectory(prefix="msio-bd-e300-") as directory:
         root = Path(directory)
         candidate = root / "candidate.py"
+        tests = root / "tests.py"
         candidate.write_text(program, encoding="utf-8")
+        tests.write_text(tests_text, encoding="utf-8")
         os.chmod(str(root), 0o755)
         os.chmod(str(candidate), 0o444)
+        os.chmod(str(tests), 0o444)
         container_name = "msio-bd-e300-" + uuid.uuid4().hex
         command = [
             "docker", "run", "--rm", "--name", container_name,
@@ -91,6 +120,10 @@ def verify(prompt, answer, timeout_s=10):
                 "stdout_bytes": min(len(completed.stdout), 65536),
                 "stderr_bytes": min(len(completed.stderr), 65536),
                 "stderr_preview": completed.stderr[:512].decode("utf-8", "replace"),
+                "failed_assertions": completed.returncode - 30
+                if 31 <= completed.returncode <= 60 else 0,
+                "total_assertions": len([line for line in tests_text.splitlines()
+                                         if line.strip()]),
             }
         except subprocess.TimeoutExpired:
             return {"classification": "timeout_failure", "returncode": 124,
@@ -112,7 +145,7 @@ def main():
     result = verify(task["prompt"], args.answer.read_text(encoding="utf-8"))
     print(json.dumps(result, sort_keys=True))
     raise SystemExit(0 if result["classification"] in {
-        "pass", "assertion_failure", "syntax_failure", "import_failure",
+        "pass", "assertion_minor", "assertion_major", "syntax_failure", "import_failure",
         "runtime_failure", "timeout_failure", "resource_failure"
     } else 2)
 
