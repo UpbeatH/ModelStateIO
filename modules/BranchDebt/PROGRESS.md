@@ -79,3 +79,18 @@
   Windows proxy preflight reached the pinned object and D: has 286 GiB free;
   a checksum-equivalent isolated Windows acquisition path is frozen, without
   changing the E300 artifact set or scientific threshold.
+
+- 2026-09-06: E300 artifact acquisition completed. All 11 Qwen shards passed
+  the frozen size/SHA manifest and were promoted under the private model root;
+  the promotion receipt SHA-256 is `32a9a12005885e95dc7fe99ccdd3ca0ae0e30369f037a3f1664b27f1df4ccead`.
+- 2026-09-06: direct physical-capacity gate completed with `models_max=0`.
+  Qwen 7B and 14B loaded together; the attempted 32B load emitted
+  `cudaMalloc failed: out of memory` and exited nonzero. Cleanup was verified
+  with no remaining GPU compute process. Independent per-model peak HBM
+  receipts were 4,970, 9,472, and 23,330 MiB for 7B, 14B, and 32B.
+- 2026-09-06: the frozen 100-task prospective trace completed, but failed the
+  preregistered branch-entropy qualification: no-call=70, 32B=28, 14B=2
+  (minimum 10 each). This is an E300 material-qualification No-Go; no samples,
+  thresholds, or task order will be changed. The physical-capacity evidence
+  remains valid as motivation only. The research program therefore proceeds
+  to the AdapterTxn/VersionGuard source-level novelty-death audit.
