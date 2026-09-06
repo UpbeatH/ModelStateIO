@@ -72,6 +72,14 @@ failure.
   events, ten 14B repair events and ten 32B repair events. Failure is a
   branch-entropy NO-GO; tasks may not be added, removed or reordered to repair
   the distribution.
+- The trace runner verifies the promoted 11-shard receipt and the frozen
+  development-file SHA-256 before starting. It launches the pinned native
+  router with autoload disabled and two resident slots, explicitly loads the
+  7B primary, emits notice only after its answer and current-residency
+  readback, executes the isolated verifier, then records repair arrival before
+  any selected load. Load completion, evicted states and post-residency come
+  from router readback. Raw answers/logs remain Git-external and existing trace
+  output is never overwritten.
 
 ## Model and capacity contract
 
