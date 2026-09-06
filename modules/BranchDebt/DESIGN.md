@@ -3,6 +3,12 @@
 Status: material qualification active under `MSIO-BD-E300`; no performance or
 paper Go. Date: 2026-09-06.
 
+The pinned llama.cpp router already implements multi-model discovery, explicit
+load/unload, status readback and an LRU eviction path. Therefore native LRU is
+the principal systems baseline, and BranchDebt's candidate contribution is
+prospective program-dependent victim/preparation selection under physical
+capacity pressure—not generic model preloading or a new serving wrapper.
+
 ## Question
 
 Can a single-node model router use a prospectively visible application branch
