@@ -15,6 +15,16 @@ if ([IO.Path]::GetFullPath($Target) -ne [IO.Path]::GetFullPath($expectedTarget))
 
 $manifest = Join-Path $PSScriptRoot 'MODEL_ACQUISITION.tsv'
 $rows = Import-Csv -LiteralPath $manifest -Delimiter "`t"
+function Get-Sha256([string]$Path) {
+    $algorithm = [Security.Cryptography.SHA256]::Create()
+    $stream = [IO.File]::OpenRead($Path)
+    try {
+        return ([BitConverter]::ToString($algorithm.ComputeHash($stream))).Replace('-', '').ToLowerInvariant()
+    } finally {
+        $stream.Dispose()
+        $algorithm.Dispose()
+    }
+}
 New-Item -ItemType Directory -Path $Target -Force | Out-Null
 $lockPath = Join-Path $Target '.acquire.lock'
 $lock = [IO.File]::Open($lockPath, 'OpenOrCreate', 'ReadWrite', 'None')
@@ -33,7 +43,7 @@ try {
         $partial = "$final.part"
         if (Test-Path -LiteralPath $final) {
             $item = Get-Item -LiteralPath $final
-            $digest = (Get-FileHash -LiteralPath $final -Algorithm SHA256).Hash.ToLowerInvariant()
+            $digest = Get-Sha256 $final
             if ($item.Length -eq [int64]$row.bytes -and $digest -eq $row.sha256) {
                 "verified-existing`t$($row.file)`t$($row.bytes)`t$digest"
                 continue
@@ -44,14 +54,19 @@ try {
             (Get-Item -LiteralPath $partial).Length -gt [int64]$row.bytes) {
             throw "oversized partial file: $partial"
         }
-        $url = "https://huggingface.co/$repo/resolve/$($row.revision)/$($row.file)"
-        "download`t$($row.file)`t$url"
-        & curl.exe --fail --location --retry 2 --retry-delay 5 `
-            --connect-timeout 20 --max-time 21600 --speed-limit 1024 `
-            --speed-time 60 --continue-at - --proxy $Proxy --output $partial $url
-        if ($LASTEXITCODE -ne 0) { throw "curl failed with $LASTEXITCODE for $url" }
+        if (-not (Test-Path -LiteralPath $partial) -or
+            (Get-Item -LiteralPath $partial).Length -lt [int64]$row.bytes) {
+            $url = "https://huggingface.co/$repo/resolve/$($row.revision)/$($row.file)"
+            "download`t$($row.file)`t$url"
+            & curl.exe --fail --location --retry 2 --retry-delay 5 `
+                --connect-timeout 20 --max-time 21600 --speed-limit 1024 `
+                --speed-time 60 --continue-at - --proxy $Proxy --output $partial $url
+            if ($LASTEXITCODE -ne 0) { throw "curl failed with $LASTEXITCODE for $url" }
+        } else {
+            "verify-complete-partial`t$($row.file)`t$($row.bytes)"
+        }
         $item = Get-Item -LiteralPath $partial
-        $digest = (Get-FileHash -LiteralPath $partial -Algorithm SHA256).Hash.ToLowerInvariant()
+        $digest = Get-Sha256 $partial
         if ($item.Length -ne [int64]$row.bytes -or $digest -ne $row.sha256) {
             throw "identity mismatch for $partial"
         }
