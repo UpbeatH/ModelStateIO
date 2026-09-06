@@ -34,6 +34,11 @@
   two-candidate frontier from degenerating into an always-14B policy. Failure
   of this frozen entropy gate is E300 No-Go rather than permission to reorder
   or add tasks.
+- The frozen task-structure audit at revision `3c90205` passed on all 300
+  development prompts: every prompt contains exactly three independently
+  executable assertion lines. No model output was opened. This qualifies the
+  minor-versus-major assertion routing contract without post-hoc task
+  exclusion.
 - E300 is not yet PASS: the 11 frozen official model shards are still being
   acquired and must pass size/hash, per-model loadability, measured HBM and
   physical eviction/reload checks. A later preflight found the earlier
