@@ -79,6 +79,13 @@ one model at a time; their sum is a necessary capacity-pressure check, not yet
 proof of an eviction transition. A later new receipt must directly observe at
 least one demanded eviction/reload before E300 can pass.
 
+Before the large-artifact capacity run, one technical router smoke may use the
+three already provenance-complete small models. It must start the pinned router
+with `models_max=2` and autoload disabled, load the models in a frozen order,
+and require status readback showing that the third load evicts the first model
+through native LRU. This qualifies the action/readback surface only. The small
+models cannot satisfy physical-capacity or performance criteria.
+
 ## Safety and stopping
 
 - Only g130 private ModelStateIO paths; no g129, PFS/Lustre, system CUDA,
