@@ -1,5 +1,15 @@
 # BranchDebt progress
 
+## 2026-09-06 local large-artifact acquisition complete
+
+- The frozen 7B/14B/32B set is complete locally: 11/11 independently verified
+  shards, `36,933,341,696` total bytes, zero remaining `.part` files and zero
+  manifest mismatch. This is acquisition evidence only.
+- Both bounded automatic SCP modes were nonviable. E300 is at a technical
+  transfer stop pending one Termius directory upload to g130. No GPU,
+  loadability, physical-capacity or trace claim is inherited from the local
+  files.
+
 ## 2026-09-06 E300 prospective-material checkpoint
 
 - Pinned AgentTrace source commit
