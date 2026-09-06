@@ -10,3 +10,7 @@
   root. Official Qwen 7B-Q4, 14B-Q4 and 32B-Q5 shard identities are frozen;
   their total 36.9 GB exceeds V100 HBM, pending acquisition and actual
   per-model load/HBM measurements.
+- 2026-09-06: the first acquisition launch transferred zero bytes and exposed
+  a missing wall-time bound. Its exact owned process tree was terminated and
+  the empty target preserved. The runner now freezes a 20-second connect bound,
+  60-second low-speed stop and 45-minute per-shard wall bound before retry.

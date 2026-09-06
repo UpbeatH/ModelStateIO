@@ -48,7 +48,8 @@ tail -n +2 "$manifest" | while IFS=$'\t' read -r model revision file bytes diges
   fi
   url="https://huggingface.co/$repo/resolve/$revision/$file"
   printf 'download\t%s\t%s\n' "$file" "$url"
-  curl --fail --location --retry 2 --retry-delay 5 --continue-at - \
+  curl --fail --location --retry 2 --retry-delay 5 --connect-timeout 20 \
+    --max-time 2700 --speed-limit 1024 --speed-time 60 --continue-at - \
     --output "$part" "$url"
   actual_bytes=$(stat -c '%s' "$part")
   actual_digest=$(sha256sum "$part" | awk '{print $1}')
