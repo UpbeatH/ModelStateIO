@@ -16,14 +16,17 @@ manifest=${MODEL_MANIFEST:-}
 case "$alias_name" in
   qwen2.5-7b-instruct-q4_k_m)
     manifest_model=Qwen2.5-7B-Instruct-Q4_K_M
+    model_subdir=qwen2.5-7b-instruct-q4_k_m
     first=qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf
     port=18107 ;;
   qwen2.5-14b-instruct-q4_k_m)
     manifest_model=Qwen2.5-14B-Instruct-Q4_K_M
+    model_subdir=qwen2.5-14b-instruct-q4_k_m
     first=qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf
     port=18114 ;;
   qwen2.5-32b-instruct-q5_k_m)
     manifest_model=Qwen2.5-32B-Instruct-Q5_K_M
+    model_subdir=qwen2.5-32b-instruct-q5_k_m
     first=qwen2.5-32b-instruct-q5_k_m-00001-of-00006.gguf
     port=18132 ;;
   *) echo "unknown frozen model alias" >&2; exit 64 ;;
@@ -48,7 +51,7 @@ fi
 count=0
 while IFS=$'\t' read -r model revision file bytes sha; do
   [[ "$model" == "$manifest_model" ]] || continue
-  path="$model_dir/$file"
+  path="$model_dir/$model_subdir/$file"
   [[ -f "$path" ]] || { echo "missing shard: $path" >&2; exit 66; }
   [[ $(stat -c %s "$path") == "$bytes" ]] || { echo "size mismatch: $path" >&2; exit 65; }
   [[ $(sha256sum "$path" | awk '{print $1}') == "$sha" ]] || { echo "hash mismatch: $path" >&2; exit 65; }
@@ -74,7 +77,7 @@ trap cleanup EXIT INT TERM
 total_mib=$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits | head -1 | tr -d ' ')
 start_ns=$(date +%s%N)
 CUDA_VISIBLE_DEVICES=0 LD_LIBRARY_PATH=/usr/local/cuda-11.6/lib64 \
-  "$server" -m "$model_dir/$first" -c 4096 -ngl 999 --no-warmup \
+  "$server" -m "$model_dir/$model_subdir/$first" -c 4096 -ngl 999 --no-warmup \
   --host 127.0.0.1 --port "$port" >"$log" 2>&1 &
 pid=$!
 

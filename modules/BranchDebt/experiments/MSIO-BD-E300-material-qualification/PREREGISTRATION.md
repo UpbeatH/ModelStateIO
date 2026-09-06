@@ -81,6 +81,13 @@ repositories, into the g130 `chenhao` private runtime, with partial-file name,
 size/hash/source receipt and atomic final rename. Acquisition is not model
 loadability or capacity evidence.
 
+Manual transfer, if required by the measured network path, lands all final
+filenames in the isolated `incoming/models-e300/` directory. Promotion is
+all-or-nothing: verify all 11 frozen sizes and SHA-256 values first, then move
+them into three router-compatible multi-shard subdirectories without
+overwriting any destination. Failed `.part` files are ignored and are not
+evidence.
+
 Per-model capacity qualification uses the pinned isolated `llama-server` with
 context 4096, all layers requested on GPU, warmup disabled, and a localhost-only
 health endpoint. It runs only from an idle-GPU precheck, verifies every shard
