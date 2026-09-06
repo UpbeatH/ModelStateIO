@@ -110,6 +110,13 @@ one model at a time; their sum is a necessary capacity-pressure check, not yet
 proof of an eviction transition. A later new receipt must directly observe at
 least one demanded eviction/reload before E300 can pass.
 
+The physical-conflict receipt must additionally attempt the frozen 7B, 14B and
+32B set with router `models_max=0`. It passes only if the first load sequence
+reaches a genuine GPU-memory capacity failure, the failure is evidenced by
+router/CUDA status rather than inferred from file sizes, no foreign GPU process
+is present, and all owned processes and memory are cleaned up. A conflict
+created only by `models_max` is rejected by the material validator.
+
 Before the large-artifact capacity run, one technical router smoke may use the
 three already provenance-complete small models. It must start the pinned router
 with `models_max=2` and autoload disabled, load the models in a frozen order,

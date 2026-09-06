@@ -51,7 +51,10 @@ class MaterialValidatorTests(unittest.TestCase):
         result = self.run_case(
             [event(i) for i in range(100)],
             {"usable_hbm_bytes": 100, "per_model_peak_hbm_bytes": {
-                "primary": 40, "repair_a": 40, "repair_b": 40}},
+                "primary": 40, "repair_a": 40, "repair_b": 40},
+             "physical_conflict": {"observed": True, "models_max": 0,
+                "attempted_models": ["primary", "repair_a", "repair_b"],
+                "cause": "gpu_memory_capacity", "cleanup_ok": True}},
         )
         self.assertEqual(result["decision"], "PASS_MATERIAL_CONTRACT_ONLY")
 
@@ -60,13 +63,28 @@ class MaterialValidatorTests(unittest.TestCase):
         events[0]["decision_view"]["selected_state_id"] = "repair_a"
         with self.assertRaises(VALIDATOR.Invalid):
             self.run_case(events, {"usable_hbm_bytes": 100,
-                "per_model_peak_hbm_bytes": {"primary": 40, "repair_a": 40, "repair_b": 40}})
+                "per_model_peak_hbm_bytes": {"primary": 40, "repair_a": 40, "repair_b": 40},
+                "physical_conflict": {"observed": True, "models_max": 0,
+                    "attempted_models": ["primary", "repair_a", "repair_b"],
+                    "cause": "gpu_memory_capacity", "cleanup_ok": True}})
 
     def test_software_only_capacity_is_rejected(self):
         with self.assertRaises(VALIDATOR.Invalid):
             self.run_case([event(i) for i in range(100)], {
                 "usable_hbm_bytes": 200,
-                "per_model_peak_hbm_bytes": {"primary": 40, "repair_a": 40, "repair_b": 40}})
+                "per_model_peak_hbm_bytes": {"primary": 40, "repair_a": 40, "repair_b": 40},
+                "physical_conflict": {"observed": True, "models_max": 0,
+                    "attempted_models": ["primary", "repair_a", "repair_b"],
+                    "cause": "gpu_memory_capacity", "cleanup_ok": True}})
+
+    def test_software_limit_is_not_physical_conflict(self):
+        with self.assertRaises(VALIDATOR.Invalid):
+            self.run_case([event(i) for i in range(100)], {
+                "usable_hbm_bytes": 100,
+                "per_model_peak_hbm_bytes": {"primary": 40, "repair_a": 40, "repair_b": 40},
+                "physical_conflict": {"observed": True, "models_max": 2,
+                    "attempted_models": ["primary", "repair_a", "repair_b"],
+                    "cause": "gpu_memory_capacity", "cleanup_ok": True}})
 
 
 if __name__ == "__main__":

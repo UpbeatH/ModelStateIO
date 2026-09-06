@@ -47,6 +47,13 @@ def validate(trace_path: Path, capacity_path: Path) -> dict[str, object]:
         raise Invalid("invalid per-model peak")
     if sum(peaks.values()) <= usable:
         raise Invalid("measured state working set does not exceed usable HBM")
+    conflict = capacity.get("physical_conflict")
+    if not isinstance(conflict, dict) or conflict.get("observed") is not True:
+        raise Invalid("no directly observed physical capacity conflict")
+    if conflict.get("models_max") != 0 or len(conflict.get("attempted_models", [])) < 3:
+        raise Invalid("physical conflict was confounded by a software model limit")
+    if conflict.get("cause") != "gpu_memory_capacity" or conflict.get("cleanup_ok") is not True:
+        raise Invalid("physical conflict cause or cleanup is unqualified")
 
     events = []
     seen = set()
@@ -125,6 +132,7 @@ def validate(trace_path: Path, capacity_path: Path) -> dict[str, object]:
         "eviction_required_events": evictions,
         "usable_hbm_bytes": usable,
         "state_peak_sum_bytes": sum(peaks.values()),
+        "physical_conflict": conflict,
     }
 
 
