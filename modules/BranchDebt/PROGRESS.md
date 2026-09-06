@@ -29,8 +29,15 @@
   qualification only, not workload or performance evidence.
 - E300 is not yet PASS: the 11 frozen official model shards are still being
   acquired and must pass size/hash, per-model loadability, measured HBM and
-  physical eviction/reload checks. An unrelated g130 GPU process remains a
-  safety stop for GPU execution.
+  physical eviction/reload checks. A later preflight found the earlier
+  unrelated g130 GPU process gone; every future run must still repeat the
+  idle-GPU check.
+- The pinned native-router smoke at code revision `eead901` passed. With three
+  provenance-complete small models and `models_max=2`, the third explicit load
+  evicted the first model through native LRU; status readback matched the
+  expected `unloaded/loaded/loaded` state and postflight was clean. This closes
+  only the technical action/readback question, not physical capacity or
+  performance qualification.
 
 - 2026-09-06: candidate created as a clean successor to CallAhead, not a
   reopened E001. `MSIO-BD-E300` is the only active ID. Existing three small
