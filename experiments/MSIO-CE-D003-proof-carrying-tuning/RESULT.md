@@ -1,5 +1,11 @@
 # MSIO-CE-D003 local design result
 
+Execution note, 2026-09-08: the original 30-call LLM proposal screen was not
+run. It was superseded by the lean deterministic D003R1 effective-state
+quotient gate, which completed 30/30 real runtime configurations and returned
+`NO_GO_EFFECTIVE_QUOTIENT_GAP`. See
+`../MSIO-CE-D003R1-effective-state-quotient/RESULT.md`.
+
 Date: 2026-09-08. Decision:
 `LOCAL_DESIGN_FROZEN_NO_MODEL_OR_SYSTEM_RUN`.
 
