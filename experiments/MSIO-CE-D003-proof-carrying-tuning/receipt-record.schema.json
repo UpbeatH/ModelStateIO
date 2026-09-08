@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modelstateio.local/schemas/receipt-record-v0.json",
+  "title": "ModelStateIO proof-carrying trial receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "trial_id",
+    "proposal_id",
+    "precheck",
+    "ack",
+    "observations",
+    "freshness_verified",
+    "identity_verified",
+    "canonicalization",
+    "outcome",
+    "rollback",
+    "cleanup"
+  ],
+  "properties": {
+    "schema_version": {"const": "modelstateio-receipt-record-v0"},
+    "trial_id": {"type": "string", "minLength": 1},
+    "proposal_id": {"type": "string", "minLength": 1},
+    "precheck": {
+      "type": "object",
+      "required": ["passed", "reason"],
+      "properties": {
+        "passed": {"type": "boolean"},
+        "reason": {"type": ["string", "null"]}
+      }
+    },
+    "ack": {
+      "type": "object",
+      "required": ["accepted", "receipt"],
+      "properties": {
+        "accepted": {"type": ["boolean", "null"]},
+        "receipt": {"type": "object"}
+      }
+    },
+    "observations": {
+      "type": "object",
+      "properties": {
+        "control_plane": {"type": ["object", "null"]},
+        "physical": {"type": ["object", "null"]},
+        "semantic": {"type": ["object", "null"]},
+        "lineage": {"type": ["object", "null"]}
+      }
+    },
+    "freshness_verified": {"type": "boolean"},
+    "identity_verified": {"type": "boolean"},
+    "canonicalization": {
+      "type": "object",
+      "required": ["changed", "requested", "effective"],
+      "properties": {
+        "changed": {"type": "boolean"},
+        "requested": {},
+        "effective": {}
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["status", "correct", "metrics"],
+      "properties": {
+        "status": {"type": "string", "minLength": 1},
+        "correct": {"type": ["boolean", "null"]},
+        "metrics": {"type": "object"}
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "required": ["required", "verified"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "verified": {"type": ["boolean", "null"]}
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "required": ["verified"],
+      "properties": {"verified": {"type": "boolean"}}
+    }
+  }
+}

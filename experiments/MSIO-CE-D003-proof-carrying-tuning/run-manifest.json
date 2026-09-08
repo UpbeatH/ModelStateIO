@@ -1,0 +1,39 @@
+{
+  "experiment_id": "MSIO-CE-D003",
+  "stage": "LOCAL_DESIGN_FREEZE",
+  "status": "LOCAL_DESIGN_FROZEN_NO_MODEL_OR_SYSTEM_RUN",
+  "design_parent_revision": "c664afcd124838042cdda596dc65ec112aa3aa50",
+  "cluster_execution_authorized": false,
+  "proposal_generation_authorized": false,
+  "development_dependencies": {
+    "MSIO-CE-D000/decision-episode.schema.json": "7f5de2f1fcd085d44cacb19a27dc8b15e0961e396616a4ff37cf5af1d915376f",
+    "MSIO-CE-D001/RESULT.md": "03a0de10f881c729bc190b21e22ca91777866df396544deed0663e5058688157",
+    "MSIO-CE-D002-TR1-P1/RESULT.md": "f3e18bfd9e9ac9e812353c444a35f5ef5665e5b73136357e77708d47594e7680",
+    "MSIO-CE-D002-TR1-P1/ANALYSIS.json": "20bd19a99bbc76bd804b61ad93a70f0dc66f0afacae0782bb798ccd800fd6218"
+  },
+  "planned_d003a": {
+    "proposal_cells": 6,
+    "proposals_per_cell": 5,
+    "scheduled_proposals": 30,
+    "model_contexts": 2,
+    "objectives": [
+      "cold_start_latency",
+      "bounded_hbm_use",
+      "steady_request_throughput"
+    ],
+    "requested_proposer_model": "deepseek-v4-pro-0813",
+    "post_ack_mismatch_go_count": 7,
+    "wilson_confidence": 0.95,
+    "wilson_lower_prevalence_floor": 0.10,
+    "minimum_action_families": 2
+  },
+  "historical_evidence_role": "development_only_not_confirmatory",
+  "external_data_root": "UNASSIGNED_UNTIL_EXECUTION_PACKET",
+  "retention": "raw prompts responses logs traces and models stay outside Git",
+  "known_limitations": [
+    "novelty audit not yet complete",
+    "exact future runtime action surfaces require fresh admission",
+    "no prospective proposal or real-system episode exists",
+    "local reference tests are not performance evidence"
+  ]
+}
