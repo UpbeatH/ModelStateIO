@@ -1,0 +1,25 @@
+{
+  "base_url": "https://tokenrhythm.studio/v1",
+  "conditions": [
+    "positive_only",
+    "counterevidence_aware"
+  ],
+  "experiment_id": "MSIO-CE-D002-TR1",
+  "fresh_context_per_invocation": true,
+  "gateway": "tokenrhythm",
+  "json_response_mode": "json_object",
+  "model": "deepseek-v4-pro-0813",
+  "planned_invocations": 72,
+  "prediction_template_sha256": "94013af993bfae26b74c4d6f9c858939fe0cd78e356a116e0d4878b35acf7849",
+  "prompts_sha256": "db9cf94880d038b2d75b7a6c6c0a4ff300378d525ee302323f4c19061203e216",
+  "reasoning_effective_receipt": "not_exposed_by_gateway_contract",
+  "reasoning_effort": "high",
+  "repetitions": 3,
+  "scenarios_per_condition": 12,
+  "source_d002_prompts_sha256": "f2800c0863858e00a1c7c1bcc98b39701e36fe20f605e1834a31c30e5d145bc9",
+  "source_messages_preserved": true,
+  "status": "PACKET_FROZEN_CREDENTIAL_NOT_PRESENT",
+  "stream": false,
+  "thinking": "enabled",
+  "tools": "omitted"
+}

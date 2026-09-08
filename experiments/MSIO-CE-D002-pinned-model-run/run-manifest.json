@@ -1,0 +1,30 @@
+{
+  "conditions": [
+    "positive_only",
+    "counterevidence_aware"
+  ],
+  "d001_inputs": {
+    "model-inputs-counterevidence-aware.jsonl": "b8be05a516c4c402592838661a776306d03a330c6707ddf96b67c567be51e89f",
+    "model-inputs-positive-only.jsonl": "598313608a21dbd5ea7719711d75256c1787f560060f352565a72aa0433f6f8c",
+    "scenarios-with-oracles.jsonl": "e74a8dbae366612909862c48070672e305bd87e1726052481c2db3f054cd3545"
+  },
+  "executor_requirements": [
+    "record actual client build and returned model identity",
+    "one fresh independent context per run_id",
+    "store raw responses outside prompt packet before parsing",
+    "no selective retry or prompt repair"
+  ],
+  "experiment_id": "MSIO-CE-D002",
+  "fresh_context_per_invocation": true,
+  "model": "gpt-5.6-luna",
+  "outcome_exposure": "development_scenarios_known_to_design_team_but_hidden_from_prompts",
+  "planned_invocations": 72,
+  "prediction_template_sha256": "e90ff85681c50fe98a8b519c7b305c445f336e75743442a46d96160d02ea20a2",
+  "prompts_sha256": "f2800c0863858e00a1c7c1bcc98b39701e36fe20f605e1834a31c30e5d145bc9",
+  "reasoning_effort": "high",
+  "repetitions": 3,
+  "scenarios_per_condition": 12,
+  "seed": "not_exposed",
+  "status": "PACKET_FROZEN_MODEL_NOT_RUN",
+  "temperature": "not_exposed"
+}

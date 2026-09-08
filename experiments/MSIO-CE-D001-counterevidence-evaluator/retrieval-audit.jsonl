@@ -1,0 +1,12 @@
+{"counterevidence_aware":["CA-HARM-NULL","CA-READINESS-POS"],"positive_only":["CA-READINESS-POS"],"scenario_id":"S01-CA-READINESS"}
+{"counterevidence_aware":["CA-HARM-NULL","CA-READINESS-POS"],"positive_only":["CA-READINESS-POS"],"scenario_id":"S02-CA-PACING-NECESSITY"}
+{"counterevidence_aware":["CSR-REVERSAL-NULL","CSR-STATE-TECH"],"positive_only":["CSR-STATE-TECH"],"scenario_id":"S03-CSR-SELECTOR"}
+{"counterevidence_aware":["LB-ALT-POS","LB-E800-TECH"],"positive_only":["LB-ALT-POS","LB-E800-TECH"],"scenario_id":"S04-LB-ALTERNATING"}
+{"counterevidence_aware":["LB-GROUPED-NULL","LB-E800-TECH"],"positive_only":["LB-E800-TECH"],"scenario_id":"S05-LB-GROUPED"}
+{"counterevidence_aware":["LL-E938-TECH","LL-E939-HARM"],"positive_only":["LL-E938-TECH"],"scenario_id":"S06-LAYERLEASE-CAPACITY"}
+{"counterevidence_aware":["PD-QWEN-POS"],"positive_only":["PD-QWEN-POS"],"scenario_id":"S07-PD-QWEN"}
+{"counterevidence_aware":["PD-CROSSARCH-NULL"],"positive_only":[],"scenario_id":"S08-PD-CROSSARCH"}
+{"counterevidence_aware":["E006-ARRIVAL-SCOPE","E006-FIXHEAD-POS"],"positive_only":["E006-FIXHEAD-POS"],"scenario_id":"S09-E006-FIXHEAD"}
+{"counterevidence_aware":["E006-PRBASE-HARM"],"positive_only":[],"scenario_id":"S10-E006-PRBASE"}
+{"counterevidence_aware":["IR-E920-NULL"],"positive_only":[],"scenario_id":"S11-IR-AFFECTED-SET"}
+{"counterevidence_aware":["LB-E800-TECH"],"positive_only":["LB-E800-TECH"],"scenario_id":"S12-E800-EFFECTIVE"}

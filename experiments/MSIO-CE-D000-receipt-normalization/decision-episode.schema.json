@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modelstateio.local/schemas/decision-episode-v0.json",
+  "title": "ModelStateIO historical decision episode",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "episode_id",
+    "experiment_id",
+    "development_exposed",
+    "decision_stage",
+    "evidence_role",
+    "analysis_unit",
+    "source",
+    "context_before",
+    "requested_receipt",
+    "effective_receipt",
+    "state_receipt",
+    "outcome_receipt",
+    "rollback_receipt"
+  ],
+  "properties": {
+    "schema_version": {"const": "modelstateio-decision-episode-v0"},
+    "episode_id": {"type": "string", "minLength": 1},
+    "experiment_id": {"type": "string", "minLength": 1},
+    "development_exposed": {"const": true},
+    "decision_stage": {"const": "post_action_validation"},
+    "evidence_role": {
+      "enum": [
+        "DEVELOPMENT_ACTION_RECEIPT",
+        "DEVELOPMENT_NULL_COUNTEREVIDENCE",
+        "DEVELOPMENT_STATE_LINEAGE",
+        "DEVELOPMENT_DIAGNOSTIC_COUNTEREXAMPLE"
+      ]
+    },
+    "analysis_unit": {"type": "string", "minLength": 1},
+    "source": {
+      "type": "object",
+      "required": ["outcome_exposure", "artifacts"],
+      "properties": {
+        "outcome_exposure": {"const": "historical_outcome_opened_before_normalization"},
+        "artifacts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["locator", "sha256"],
+            "properties": {
+              "locator": {"type": "string", "minLength": 1},
+              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+            }
+          }
+        }
+      }
+    },
+    "context_before": {"type": "object"},
+    "requested_receipt": {
+      "type": "object",
+      "required": ["action", "parameters", "scope"],
+      "properties": {
+        "action": {"type": "string", "minLength": 1},
+        "parameters": {"type": "object"},
+        "scope": {"type": "object"}
+      }
+    },
+    "effective_receipt": {
+      "type": "object",
+      "required": [
+        "accepted",
+        "control_plane_verified",
+        "physical_verified",
+        "semantic_verified",
+        "application_class",
+        "observations"
+      ],
+      "properties": {
+        "accepted": {"type": ["boolean", "null"]},
+        "control_plane_verified": {"type": ["boolean", "null"]},
+        "physical_verified": {"type": ["boolean", "null"]},
+        "semantic_verified": {"type": ["boolean", "null"]},
+        "application_class": {
+          "enum": [
+            "ACCEPTED_ONLY",
+            "CONTROL_PLANE_EFFECTIVE",
+            "PHYSICALLY_EFFECTIVE",
+            "SEMANTICALLY_EFFECTIVE",
+            "PARTIAL",
+            "REJECTED",
+            "NO_OP",
+            "INCONSISTENT",
+            "UNVERIFIED"
+          ]
+        },
+        "observations": {"type": "object"}
+      }
+    },
+    "state_receipt": {
+      "type": "object",
+      "required": ["before", "after_action", "after_workload", "after_cleanup", "lineage"],
+      "properties": {
+        "before": {"type": "object"},
+        "after_action": {"type": "object"},
+        "after_workload": {"type": "object"},
+        "after_cleanup": {"type": "object"},
+        "lineage": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "outcome_receipt": {
+      "type": "object",
+      "required": ["status", "metrics", "correctness", "uncertainty"],
+      "properties": {
+        "status": {"type": "string", "minLength": 1},
+        "metrics": {"type": "object"},
+        "correctness": {"type": "object"},
+        "uncertainty": {"type": "object"}
+      }
+    },
+    "rollback_receipt": {
+      "type": "object",
+      "required": ["required", "verified", "observations"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "verified": {"type": ["boolean", "null"]},
+        "observations": {"type": "object"}
+      }
+    }
+  }
+}

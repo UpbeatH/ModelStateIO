@@ -1,0 +1,125 @@
+{
+  "baselines": {
+    "counterevidence_aware": {
+      "accuracy": 1.0,
+      "correct": 12,
+      "decision_recall": {
+        "ABSTAIN": {
+          "correct": 7,
+          "population": 7,
+          "recall": 1.0
+        },
+        "APPLY": {
+          "correct": 4,
+          "population": 4,
+          "recall": 1.0
+        },
+        "PROBE": {
+          "correct": 1,
+          "population": 1,
+          "recall": 1.0
+        }
+      },
+      "harmful_apply": 0,
+      "missed_abstain": 0,
+      "predictions": {
+        "S01-CA-READINESS": "APPLY",
+        "S02-CA-PACING-NECESSITY": "ABSTAIN",
+        "S03-CSR-SELECTOR": "ABSTAIN",
+        "S04-LB-ALTERNATING": "APPLY",
+        "S05-LB-GROUPED": "ABSTAIN",
+        "S06-LAYERLEASE-CAPACITY": "ABSTAIN",
+        "S07-PD-QWEN": "APPLY",
+        "S08-PD-CROSSARCH": "ABSTAIN",
+        "S09-E006-FIXHEAD": "PROBE",
+        "S10-E006-PRBASE": "ABSTAIN",
+        "S11-IR-AFFECTED-SET": "ABSTAIN",
+        "S12-E800-EFFECTIVE": "APPLY"
+      },
+      "premature_apply": 0,
+      "total": 12
+    },
+    "positive_only": {
+      "accuracy": 0.3333333333333333,
+      "correct": 4,
+      "decision_recall": {
+        "ABSTAIN": {
+          "correct": 0,
+          "population": 7,
+          "recall": 0.0
+        },
+        "APPLY": {
+          "correct": 4,
+          "population": 4,
+          "recall": 1.0
+        },
+        "PROBE": {
+          "correct": 0,
+          "population": 1,
+          "recall": 0.0
+        }
+      },
+      "harmful_apply": 0,
+      "missed_abstain": 7,
+      "predictions": {
+        "S01-CA-READINESS": "APPLY",
+        "S02-CA-PACING-NECESSITY": "PROBE",
+        "S03-CSR-SELECTOR": "PROBE",
+        "S04-LB-ALTERNATING": "APPLY",
+        "S05-LB-GROUPED": "PROBE",
+        "S06-LAYERLEASE-CAPACITY": "PROBE",
+        "S07-PD-QWEN": "APPLY",
+        "S08-PD-CROSSARCH": "PROBE",
+        "S09-E006-FIXHEAD": "APPLY",
+        "S10-E006-PRBASE": "PROBE",
+        "S11-IR-AFFECTED-SET": "PROBE",
+        "S12-E800-EFFECTIVE": "APPLY"
+      },
+      "premature_apply": 1,
+      "total": 12
+    },
+    "receipt_only": {
+      "accuracy": 0.16666666666666666,
+      "correct": 2,
+      "decision_recall": {
+        "ABSTAIN": {
+          "correct": 0,
+          "population": 7,
+          "recall": 0.0
+        },
+        "APPLY": {
+          "correct": 1,
+          "population": 4,
+          "recall": 0.25
+        },
+        "PROBE": {
+          "correct": 1,
+          "population": 1,
+          "recall": 1.0
+        }
+      },
+      "harmful_apply": 0,
+      "missed_abstain": 7,
+      "predictions": {
+        "S01-CA-READINESS": "PROBE",
+        "S02-CA-PACING-NECESSITY": "PROBE",
+        "S03-CSR-SELECTOR": "PROBE",
+        "S04-LB-ALTERNATING": "PROBE",
+        "S05-LB-GROUPED": "PROBE",
+        "S06-LAYERLEASE-CAPACITY": "PROBE",
+        "S07-PD-QWEN": "PROBE",
+        "S08-PD-CROSSARCH": "PROBE",
+        "S09-E006-FIXHEAD": "PROBE",
+        "S10-E006-PRBASE": "PROBE",
+        "S11-IR-AFFECTED-SET": "PROBE",
+        "S12-E800-EFFECTIVE": "APPLY"
+      },
+      "premature_apply": 0,
+      "total": 12
+    }
+  },
+  "max_evidence_chars": 1800,
+  "not_llm_evaluation": true,
+  "status": "DEVELOPMENT_HARNESS_RESULT",
+  "top_k": 3
+}
