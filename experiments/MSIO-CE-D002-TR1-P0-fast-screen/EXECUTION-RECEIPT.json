@@ -1,0 +1,14 @@
+{
+  "completed_at": "2026-09-08T14:47:54+08:00",
+  "invalid_by_condition": {
+    "counterevidence_aware": 11,
+    "positive_only": 6
+  },
+  "model_calls": 24,
+  "predictions_sha256": "9620836f828acf8f32f7d4044d577c1b01cf734e11d16a2c31726793cf7b801a",
+  "score_sha256": "8ef2e00f21d172339c53c48ac3b83bf2ca06a0370c67e8b1d7bc7daf138f03cf",
+  "scorer_exit_code": 0,
+  "scorer_stdout": "{\"decision\": \"P0_NO_GO_TO_PROMPT_EXPANSION\", \"predictions_sha256\": \"9620836f828acf8f32f7d4044d577c1b01cf734e11d16a2c31726793cf7b801a\", \"summaries\": {\"counterevidence_aware\": {\"exact\": 0, \"premature_apply\": 0, \"valid_calls\": 1}, \"positive_only\": {\"exact\": 1, \"premature_apply\": 0, \"valid_calls\": 6}}}",
+  "started_at": "2026-09-08T14:41:54+08:00",
+  "system_fingerprint_optional": true
+}

@@ -1,6 +1,7 @@
 # MSIO-CE-D002-TR1 packet-freeze result
 
-Date: 2026-09-08. Decision: `PACKET_FROZEN_CREDENTIAL_STOP`.
+Date: 2026-09-08. Decision:
+`TR1_TECHNICAL_STOP_GATEWAY_QUALIFICATION`.
 
 ## Completed preparation
 
@@ -21,33 +22,25 @@ rejection, absence of the exposed key literal, and byte-identical dual builds.
 | `prediction-template.jsonl` | `94013af993bfae26b74c4d6f9c858939fe0cd78e356a116e0d4878b35acf7849` |
 | D002 source `prompts.jsonl` | `f2800c0863858e00a1c7c1bcc98b39701e36fe20f605e1834a31c30e5d145bc9` |
 
-## Credential gate observation
+## Gateway smoke observation
 
-`TOKENRHYTHM_API_KEY` was absent from the current process. The authorized
-preflight invocation therefore stopped locally with
-`TR1_TECHNICAL_STOP_CREDENTIAL` before network-request construction. The
-gateway smoke root, formal attempt root, `PREFLIGHT.json`, predictions, raw
-responses, execution receipt, and score are all absent. Authenticated/model
-calls: **0**.
+After the user configured a rotated user-level environment key, the runner
+performed the single authorized synthetic smoke. `GET /models` exposed the
+requested model. The chat request returned HTTP 200,
+`deepseek-v4-pro-0813`, a nonempty request ID, usage accounting, and observed
+thinking content in 1,938 ms. It returned `system_fingerprint=null`, so the
+strict TR1 qualification decision is
+`TR1_TECHNICAL_STOP_GATEWAY_QUALIFICATION`.
 
-The credential pasted in conversation was treated as compromised and was not
-copied into a command, file, environment variable, or log. A rotated key must
-be configured outside the conversation as `TOKENRHYTHM_API_KEY`.
+The credential value was loaded from the user environment into one child
+process and cleared without being printed or written. The credential pasted in
+conversation was not copied into a command or repository file. Raw smoke data
+are outside Git under `ModelStateIO-data/MSIO-CE-D002-TR1/smoke-001`.
 
 ## Evidence boundary and next gate
 
-No model result exists. This is neither a development-model No-Go nor evidence
-about counterevidence-aware decisions. TR1 is a TokenRhythm gateway experiment
-and must not be reported as an official DeepSeek API result. Requested
-reasoning effort high is not an effective-setting receipt because the gateway
-does not document an echoed effective effort field.
-
-With a rotated environment key present, the exact next command is:
-
-```text
-python run_gateway.py --smoke
-```
-
-Only a `TR1_GATEWAY_QUALIFIED` receipt opens the already authorized one-shot
-`python run_gateway.py --run`. No model substitution, receipt relaxation,
-retry, second attempt root, or secret persistence is permitted.
+Strict TR1 issued one synthetic model call and no 72-call experiment. It is
+neither a development-model No-Go nor evidence about counterevidence-aware
+decisions. The separately frozen P0 fast screen treats fingerprint as optional
+and records the gateway limitation explicitly. TR1 remains a TokenRhythm
+gateway experiment and must not be reported as an official DeepSeek API run.

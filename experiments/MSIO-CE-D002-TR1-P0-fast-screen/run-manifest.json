@@ -1,0 +1,19 @@
+{
+  "base_url": "https://tokenrhythm.studio/v1",
+  "experiment_id": "MSIO-CE-D002-TR1-P0",
+  "go_thresholds": {
+    "counterevidence_exact_min": 10,
+    "counterevidence_premature_apply_max": 0,
+    "exact_advantage_min": 3,
+    "valid_calls_each_min": 11
+  },
+  "model": "deepseek-v4-pro-0813",
+  "planned_invocations": 24,
+  "prediction_template_sha256": "0326bdd120903811ee7ca2a3cc3cb7938809bd60d9233fb8d9a7f9c4251acd5a",
+  "prompts_sha256": "04410d017024032c165b57229afd85edfc2cc3ad53b7662fa289bad05f40ad8c",
+  "reasoning_effort_requested": "high",
+  "source_tr1_prompts_sha256": "db9cf94880d038b2d75b7a6c6c0a4ff300378d525ee302323f4c19061203e216",
+  "status": "PACKET_FROZEN_AFTER_SMOKE",
+  "system_fingerprint_required": false,
+  "thinking": "enabled"
+}

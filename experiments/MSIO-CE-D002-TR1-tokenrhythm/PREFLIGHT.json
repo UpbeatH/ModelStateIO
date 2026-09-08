@@ -1,0 +1,34 @@
+{
+  "completed_at": "2026-09-08T14:36:49+08:00",
+  "decision": "TR1_TECHNICAL_STOP_GATEWAY_QUALIFICATION",
+  "gateway": "https://tokenrhythm.studio/v1",
+  "model_list_raw_sha256": "a82efa8a389bf6e24e2fa2ff10c6e928d9934209b918fc0f48872b831f709a83",
+  "model_requested": "deepseek-v4-pro-0813",
+  "reasoning_effort_requested": "high",
+  "request_body_sha256": "a6100c9a542650b12f350a96e3aaa59b537437b307451a3545c59e3c2222f3ca",
+  "smoke_receipt": {
+    "http_status": 200,
+    "raw_response_sha256": "3e766cf70f46a6e46ad488ced0f45ee1f9c582a2b8eb02e6294279fe6e9cc893",
+    "response_id": "2be91b9f-cdbf-4cc1-977a-9823842afb45",
+    "returned_model": "deepseek-v4-pro-0813",
+    "system_fingerprint": null,
+    "thinking_observed": true,
+    "usage": {
+      "completion_tokens": 27,
+      "completion_tokens_details": {
+        "reasoning_tokens": 20
+      },
+      "prompt_tokens": 219,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 246
+    }
+  },
+  "started_at": "2026-09-08T14:36:47+08:00",
+  "thinking_requested": "enabled",
+  "timing": {
+    "models_latency_ms": 156,
+    "smoke_latency_ms": 1938
+  }
+}

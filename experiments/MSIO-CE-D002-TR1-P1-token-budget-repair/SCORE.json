@@ -1,0 +1,16 @@
+{
+  "decision": "P0_NO_GO_TO_PROMPT_EXPANSION",
+  "predictions_sha256": "150a308ececd2734475265fb01add8a5939ba3f1d26bd219c849567d218df1e0",
+  "summaries": {
+    "counterevidence_aware": {
+      "exact": 6,
+      "premature_apply": 0,
+      "valid_calls": 11
+    },
+    "positive_only": {
+      "exact": 2,
+      "premature_apply": 0,
+      "valid_calls": 12
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "completed_at": "2026-09-08T15:03:36+08:00",
+  "finish_reasons": {
+    "stop": 23,
+    "unparseable_envelope": 1
+  },
+  "invalid_by_condition": {
+    "counterevidence_aware": 1
+  },
+  "max_tokens": 4096,
+  "model_calls": 24,
+  "predictions_sha256": "150a308ececd2734475265fb01add8a5939ba3f1d26bd219c849567d218df1e0",
+  "score_sha256": "f88d3691209e8c76ccb750d2f07c266c59d1a9427fc3bfa014e2f236a611c00c",
+  "scorer_exit_code": 0,
+  "scorer_stdout": "{\"decision\": \"P0_NO_GO_TO_PROMPT_EXPANSION\", \"predictions_sha256\": \"150a308ececd2734475265fb01add8a5939ba3f1d26bd219c849567d218df1e0\", \"summaries\": {\"counterevidence_aware\": {\"exact\": 6, \"premature_apply\": 0, \"valid_calls\": 11}, \"positive_only\": {\"exact\": 2, \"premature_apply\": 0, \"valid_calls\": 12}}}",
+  "started_at": "2026-09-08T14:53:12+08:00"
+}

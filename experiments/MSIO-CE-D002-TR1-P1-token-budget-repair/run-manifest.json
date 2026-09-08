@@ -1,0 +1,11 @@
+{
+  "experiment_id": "MSIO-CE-D002-TR1-P1",
+  "max_tokens": 4096,
+  "model": "deepseek-v4-pro-0813",
+  "only_change_from_p0_request": "max_tokens_900_to_4096",
+  "planned_invocations": 24,
+  "prediction_template_sha256": "61d2650a950049cc86adff3c820b53122ca5f38ca83b1b93c0d97f9fab91b7f7",
+  "prompts_sha256": "e767edb95a231ba87973503cebf2b4db159162cb29751ce2ef389e50212f91e2",
+  "source_p0_prompts_sha256": "04410d017024032c165b57229afd85edfc2cc3ad53b7662fa289bad05f40ad8c",
+  "status": "PACKET_FROZEN_BEFORE_OUTPUT"
+}

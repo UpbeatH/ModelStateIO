@@ -1,0 +1,241 @@
+{
+  "analysis_class": "prespecified-score-plus-descriptive-error-decomposition",
+  "decision": "P1_NO_GO_STOP_API_PROMPT_BRANCH",
+  "exact_advantage": 4,
+  "paired_exact": {
+    "both_correct": 1,
+    "both_wrong": 5,
+    "counter_correct_positive_wrong": 5,
+    "positive_correct_counter_wrong": 1
+  },
+  "per_scenario": {
+    "S01-CA-READINESS": {
+      "counterevidence_aware": {
+        "exact": false,
+        "oracle": "APPLY",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      },
+      "positive_only": {
+        "exact": false,
+        "oracle": "APPLY",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      }
+    },
+    "S02-CA-PACING-NECESSITY": {
+      "counterevidence_aware": {
+        "exact": true,
+        "oracle": "ABSTAIN",
+        "prediction": "ABSTAIN",
+        "status": "COMPLETED"
+      },
+      "positive_only": {
+        "exact": true,
+        "oracle": "ABSTAIN",
+        "prediction": "ABSTAIN",
+        "status": "COMPLETED"
+      }
+    },
+    "S03-CSR-SELECTOR": {
+      "counterevidence_aware": {
+        "exact": true,
+        "oracle": "ABSTAIN",
+        "prediction": "ABSTAIN",
+        "status": "COMPLETED"
+      },
+      "positive_only": {
+        "exact": false,
+        "oracle": "ABSTAIN",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      }
+    },
+    "S04-LB-ALTERNATING": {
+      "counterevidence_aware": {
+        "exact": false,
+        "oracle": "APPLY",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      },
+      "positive_only": {
+        "exact": false,
+        "oracle": "APPLY",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      }
+    },
+    "S05-LB-GROUPED": {
+      "counterevidence_aware": {
+        "exact": false,
+        "oracle": "ABSTAIN",
+        "prediction": null,
+        "status": "INVALID"
+      },
+      "positive_only": {
+        "exact": false,
+        "oracle": "ABSTAIN",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      }
+    },
+    "S06-LAYERLEASE-CAPACITY": {
+      "counterevidence_aware": {
+        "exact": true,
+        "oracle": "ABSTAIN",
+        "prediction": "ABSTAIN",
+        "status": "COMPLETED"
+      },
+      "positive_only": {
+        "exact": false,
+        "oracle": "ABSTAIN",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      }
+    },
+    "S07-PD-QWEN": {
+      "counterevidence_aware": {
+        "exact": false,
+        "oracle": "APPLY",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      },
+      "positive_only": {
+        "exact": false,
+        "oracle": "APPLY",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      }
+    },
+    "S08-PD-CROSSARCH": {
+      "counterevidence_aware": {
+        "exact": false,
+        "oracle": "ABSTAIN",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      },
+      "positive_only": {
+        "exact": true,
+        "oracle": "ABSTAIN",
+        "prediction": "ABSTAIN",
+        "status": "COMPLETED"
+      }
+    },
+    "S09-E006-FIXHEAD": {
+      "counterevidence_aware": {
+        "exact": true,
+        "oracle": "PROBE",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      },
+      "positive_only": {
+        "exact": false,
+        "oracle": "PROBE",
+        "prediction": "ABSTAIN",
+        "status": "COMPLETED"
+      }
+    },
+    "S10-E006-PRBASE": {
+      "counterevidence_aware": {
+        "exact": true,
+        "oracle": "ABSTAIN",
+        "prediction": "ABSTAIN",
+        "status": "COMPLETED"
+      },
+      "positive_only": {
+        "exact": false,
+        "oracle": "ABSTAIN",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      }
+    },
+    "S11-IR-AFFECTED-SET": {
+      "counterevidence_aware": {
+        "exact": true,
+        "oracle": "ABSTAIN",
+        "prediction": "ABSTAIN",
+        "status": "COMPLETED"
+      },
+      "positive_only": {
+        "exact": false,
+        "oracle": "ABSTAIN",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      }
+    },
+    "S12-E800-EFFECTIVE": {
+      "counterevidence_aware": {
+        "exact": false,
+        "oracle": "APPLY",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      },
+      "positive_only": {
+        "exact": false,
+        "oracle": "APPLY",
+        "prediction": "PROBE",
+        "status": "COMPLETED"
+      }
+    }
+  },
+  "predictions_sha256": "150a308ececd2734475265fb01add8a5939ba3f1d26bd219c849567d218df1e0",
+  "summaries": {
+    "counterevidence_aware": {
+      "confusion": {
+        "ABSTAIN->ABSTAIN": 5,
+        "ABSTAIN->INVALID": 1,
+        "ABSTAIN->PROBE": 1,
+        "APPLY->PROBE": 4,
+        "PROBE->PROBE": 1
+      },
+      "decision_recall": {
+        "ABSTAIN": {
+          "correct": 5,
+          "population": 7,
+          "recall": 0.7142857142857143
+        },
+        "APPLY": {
+          "correct": 0,
+          "population": 4,
+          "recall": 0.0
+        },
+        "PROBE": {
+          "correct": 1,
+          "population": 1,
+          "recall": 1.0
+        }
+      },
+      "exact": 6,
+      "exact_rate": 0.5,
+      "valid_calls": 11
+    },
+    "positive_only": {
+      "confusion": {
+        "ABSTAIN->ABSTAIN": 2,
+        "ABSTAIN->PROBE": 5,
+        "APPLY->PROBE": 4,
+        "PROBE->ABSTAIN": 1
+      },
+      "decision_recall": {
+        "ABSTAIN": {
+          "correct": 2,
+          "population": 7,
+          "recall": 0.2857142857142857
+        },
+        "APPLY": {
+          "correct": 0,
+          "population": 4,
+          "recall": 0.0
+        },
+        "PROBE": {
+          "correct": 0,
+          "population": 1,
+          "recall": 0.0
+        }
+      },
+      "exact": 2,
+      "exact_rate": 0.16666666666666666,
+      "valid_calls": 12
+    }
+  }
+}
